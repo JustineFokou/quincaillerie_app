@@ -1,0 +1,121 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Entrée de Stock - Gestion Quincaillerie{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-arrow-up mr-2 text-green-600"></i>
+                Entrée de Stock
+            </h2>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0">
+            <a href="{% url 'stocks:list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour aux mouvements
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <!-- Produit -->
+                    <div>
+                        <label for="produit" class="block text-sm font-medium text-gray-700">
+                            Produit *
+                        </label>
+                        <select name="produit" id="produit" required
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Sélectionner un produit</option>
+                            {% for produit in produits %}
+                                <option value="{{ produit.id }}">
+                                    {{ produit.code_produit }} - {{ produit.nom }}
+                                    {% if produit.stock_actuel is not None %}
+                                        (Stock actuel: {{ produit.stock_actuel }})
+                                    {% endif %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Quantité -->
+                    <div>
+                        <label for="quantite" class="block text-sm font-medium text-gray-700">
+                            Quantité *
+                        </label>
+                        <input type="number" name="quantite" id="quantite" required min="1"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Référence -->
+                    <div>
+                        <label for="reference" class="block text-sm font-medium text-gray-700">
+                            Référence (Facture, Bon de livraison...)
+                        </label>
+                        <input type="text" name="reference" id="reference"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Ex: FAC-2024-001">
+                    </div>
+
+                    <!-- Prix Unitaire -->
+                    <div>
+                        <label for="prix_unitaire" class="block text-sm font-medium text-gray-700">
+                            Prix Unitaire (€)
+                        </label>
+                        <input type="number" name="prix_unitaire" id="prix_unitaire" step="0.01"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Fournisseur -->
+                    <div>
+                        <label for="fournisseur" class="block text-sm font-medium text-gray-700">
+                            Fournisseur
+                        </label>
+                        <select name="fournisseur" id="fournisseur"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Aucun fournisseur</option>
+                            {% for fournisseur in fournisseurs %}
+                                <option value="{{ fournisseur.id }}">
+                                    {{ fournisseur.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Commentaire -->
+                <div>
+                    <label for="commentaire" class="block text-sm font-medium text-gray-700">
+                        Commentaire
+                    </label>
+                    <textarea name="commentaire" id="commentaire" rows="3"
+                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                              placeholder="Informations supplémentaires..."></textarea>
+                </div>
+
+                <!-- Boutons -->
+                <div class="flex justify-end space-x-3">
+                    <a href="{% url 'stocks:list' %}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Annuler
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <i class="fas fa-arrow-up mr-2"></i>
+                        Enregistrer l'entrée
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

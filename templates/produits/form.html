@@ -1,0 +1,157 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{% if produit %}Modifier{% else %}Nouveau{% endif %} Produit - Gestion Quincaillerie{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-box mr-2"></i>
+                {% if produit %}Modifier le Produit{% else %}Nouveau Produit{% endif %}
+            </h2>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0">
+            <a href="{% url 'produits:list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour à la liste
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <!-- Code Produit -->
+                    <div>
+                        <label for="code_produit" class="block text-sm font-medium text-gray-700">
+                            Code Produit *
+                        </label>
+                        <input type="text" name="code_produit" id="code_produit" required
+                               value="{% if produit %}{{ produit.code_produit }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Nom -->
+                    <div>
+                        <label for="nom" class="block text-sm font-medium text-gray-700">
+                            Nom du Produit *
+                        </label>
+                        <input type="text" name="nom" id="nom" required
+                               value="{% if produit %}{{ produit.nom }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Catégorie -->
+                    <div>
+                        <label for="categorie" class="block text-sm font-medium text-gray-700">
+                            Catégorie *
+                        </label>
+                        <select name="categorie" id="categorie" required
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Sélectionner une catégorie</option>
+                            {% for categorie in categories %}
+                                <option value="{{ categorie.id }}" 
+                                        {% if produit and produit.categorie.id == categorie.id %}selected{% endif %}>
+                                    {{ categorie.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Unité -->
+                    <div>
+                        <label for="unite" class="block text-sm font-medium text-gray-700">
+                            Unité *
+                        </label>
+                        <select name="unite" id="unite" required
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            {% for code, label in unite_choices %}
+                                <option value="{{ code }}" 
+                                        {% if produit and produit.unite == code %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Prix Achat -->
+                    <div>
+                        <label for="prix_achat" class="block text-sm font-medium text-gray-700">
+                            Prix d'Achat (€) *
+                        </label>
+                        <input type="number" name="prix_achat" id="prix_achat" required step="0.01"
+                               value="{% if produit %}{{ produit.prix_achat }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Prix Vente -->
+                    <div>
+                        <label for="prix_vente" class="block text-sm font-medium text-gray-700">
+                            Prix de Vente (€) *
+                        </label>
+                        <input type="number" name="prix_vente" id="prix_vente" required step="0.01"
+                               value="{% if produit %}{{ produit.prix_vente }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Seuil d'Alerte -->
+                    <div>
+                        <label for="seuil_alerte" class="block text-sm font-medium text-gray-700">
+                            Seuil d'Alerte *
+                        </label>
+                        <input type="number" name="seuil_alerte" id="seuil_alerte" required
+                               value="{% if produit %}{{ produit.seuil_alerte }}{% else %}10{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Fournisseur Principal -->
+                    <div>
+                        <label for="fournisseur" class="block text-sm font-medium text-gray-700">
+                            Fournisseur Principal
+                        </label>
+                        <select name="fournisseur" id="fournisseur"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Aucun fournisseur</option>
+                            {% for fournisseur in fournisseurs %}
+                                <option value="{{ fournisseur.id }}" 
+                                        {% if produit and produit.fournisseur_principal and produit.fournisseur_principal.id == fournisseur.id %}selected{% endif %}>
+                                    {{ fournisseur.nom }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                    <label for="description" class="block text-sm font-medium text-gray-700">
+                        Description
+                    </label>
+                    <textarea name="description" id="description" rows="3"
+                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{% if produit %}{{ produit.description }}{% endif %}</textarea>
+                </div>
+
+                <!-- Boutons -->
+                <div class="flex justify-end space-x-3">
+                    <a href="{% url 'produits:list' %}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Annuler
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-save mr-2"></i>
+                        {% if produit %}Mettre à jour{% else %}Créer{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
