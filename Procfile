@@ -1,1 +1,1 @@
-web: gunicorn quincaillerie.wsgi:application
+web: gunicorn quincaillerie_app.wsgi:application
