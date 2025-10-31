@@ -4,11 +4,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum, Count
 from django.utils import timezone
 from datetime import timedelta
+from django.utils.translation import gettext_lazy as _
 
 from produits.models import Produit, Categorie
 from stocks.models import MouvementStock
 from ventes.models import Vente
 from fournisseurs.models import Fournisseur
+
+
+class HomeView(TemplateView):
+    """
+    Vue pour la page d'accueil publique
+    """
+    template_name = 'core/home.html'
 
 
 class DashboardView(LoginRequiredMixin, TemplateView):
@@ -54,14 +62,16 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['nb_ventes_mois'] = ventes_mois.count()
         
         # Top 5 des produits les plus vendus
+        from ventes.models import LigneVente
         context['top_produits'] = Produit.objects.filter(
             is_active=True,
-            ventes__lignes__vente__is_active=True
+            lignevente__vente__is_active=True
         ).annotate(
-            total_vendu=Sum('ventes__lignes__quantite')
+            total_vendu=Sum('lignevente__quantite')
         ).order_by('-total_vendu')[:5]
         
-        # Alertes de stock
+        # Les alertes de stock sont maintenant gérées par le context processor global
+        # mais on garde la liste complète pour le dashboard
         context['alertes_stock'] = []
         for produit in Produit.objects.filter(is_active=True):
             stock_actuel = produit.stock_actuel

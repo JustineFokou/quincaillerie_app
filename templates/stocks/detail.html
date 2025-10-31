@@ -79,7 +79,7 @@
                     <dt class="text-sm font-medium text-gray-500">Prix Unitaire</dt>
                     <dd class="mt-1 text-sm text-gray-900">
                         {% if mouvement.prix_unitaire %}
-                            {{ mouvement.prix_unitaire|floatformat:2 }} €
+                            {{ mouvement.prix_unitaire|floatformat:2 }} FCFA
                         {% else %}
                             <span class="text-gray-400">N/A</span>
                         {% endif %}
@@ -106,7 +106,7 @@
                     <dt class="text-sm font-medium text-gray-500">Valeur Totale</dt>
                     <dd class="mt-1 text-sm text-gray-900 font-semibold">
                         {% if mouvement.valeur_totale %}
-                            {{ mouvement.valeur_totale|floatformat:2 }} €
+                            {{ mouvement.valeur_totale|floatformat:2 }} FCFA
                         {% else %}
                             <span class="text-gray-400">N/A</span>
                         {% endif %}

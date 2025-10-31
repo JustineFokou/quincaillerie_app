@@ -19,14 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.shortcuts import redirect
-
-def redirect_to_dashboard(request):
-    return redirect('/dashboard/')
+from core.views import HomeView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", redirect_to_dashboard, name="home"),
+    path("", HomeView.as_view(), name="home"),
     path("dashboard/", include("core.urls")),
     path("produits/", include("produits.urls")),
     path("stocks/", include("stocks.urls")),

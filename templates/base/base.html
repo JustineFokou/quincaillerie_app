@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="fr" class="h-full bg-gray-50">
+<html lang="{{ LANGUAGE_CODE|default:'fr' }}" class="h-full bg-gray-50">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Gestion Quincaillerie{% endblock %}</title>
+    <title>{% block title %}{% trans "Gestion Quincaillerie" %}{% endblock %}</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,211 +18,320 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="h-full">
-    <div class="min-h-full">
-        <!-- Navigation -->
-        <nav class="bg-white shadow-sm border-b border-gray-200">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 justify-between">
-                    <div class="flex">
-                        <div class="flex flex-shrink-0 items-center">
-                            <i class="fas fa-tools text-2xl text-blue-600"></i>
-                            <span class="ml-2 text-xl font-bold text-gray-900">Quincaillerie</span>
-                        </div>
-                        <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-                            <a href="{% url 'core:dashboard' %}" 
-                               class="{% if request.resolver_match.url_name == 'dashboard' %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                <i class="fas fa-tachometer-alt mr-2"></i>
-                                Dashboard
-                            </a>
-                            <a href="{% url 'produits:list' %}" 
-                               class="{% if 'produits' in request.resolver_match.namespace %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                <i class="fas fa-box mr-2"></i>
-                                Produits
-                            </a>
-                            <a href="{% url 'stocks:list' %}" 
-                               class="{% if 'stocks' in request.resolver_match.namespace %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                <i class="fas fa-warehouse mr-2"></i>
-                                Stock
-                            </a>
-                            <a href="{% url 'ventes:list' %}" 
-                               class="{% if 'ventes' in request.resolver_match.namespace %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                <i class="fas fa-shopping-cart mr-2"></i>
-                                Ventes
-                            </a>
-                            <a href="{% url 'fournisseurs:list' %}" 
-                               class="{% if 'fournisseurs' in request.resolver_match.namespace %}border-blue-500 text-blue-600{% else %}border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300{% endif %} inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
-                                <i class="fas fa-truck mr-2"></i>
-                                Fournisseurs
-                            </a>
-                        </div>
+    <div class="min-h-full flex">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed left-0 top-0 z-40 h-screen w-64 transition-transform -translate-x-full lg:translate-x-0 bg-white border-r border-gray-200 shadow-lg">
+            <div class="h-full px-3 py-4 overflow-y-auto">
+                <!-- Logo et Info Utilisateur -->
+                <div class="mb-6 px-3 pb-4 border-b border-gray-200">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-tools text-2xl text-blue-600"></i>
+                        <span class="ml-2 text-xl font-bold text-gray-900">Quincaillerie</span>
                     </div>
-                    <div class="hidden sm:ml-6 sm:flex sm:items-center">
-                        <!-- Profile dropdown -->
-                        <div class="relative ml-3">
-                            <div>
-                                <button type="button" class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                    <span class="sr-only">Open user menu</span>
-                                    <div class="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
-                                        <span class="text-white text-sm font-medium">{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</span>
-                                    </div>
-                                    <span class="ml-2 text-gray-700">{{ user.first_name }} {{ user.last_name }}</span>
-                                    <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs"></i>
-                                </button>
-                            </div>
-                            <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                <a href="{% url 'utilisateurs:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
-                                    <i class="fas fa-user mr-2"></i>Votre profil
-                                </a>
-                                {% if user.is_superuser or user.role == 'ADMIN' %}
-                                <a href="{% url 'utilisateurs:list' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
-                                    <i class="fas fa-users mr-2"></i>Utilisateurs
-                                </a>
-                                {% endif %}
-                                <hr class="my-1">
-                                <a href="{% url 'utilisateurs:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
-                                    <i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter
-                                </a>
-                            </div>
+                    <div class="flex items-center text-sm text-gray-600">
+                        <div class="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-2">
+                            <span class="text-white text-xs font-bold">
+                                {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                            </span>
                         </div>
-                    </div>
-                    <!-- Mobile menu button -->
-                    <div class="-mr-2 flex items-center sm:hidden">
-                        <button type="button" class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" id="mobile-menu-button">
-                            <span class="sr-only">Open main menu</span>
-                            <i class="fas fa-bars text-lg" id="mobile-menu-icon"></i>
-                        </button>
+                        <div>
+                            <div class="font-semibold text-gray-900">{{ user.first_name }} {{ user.last_name }}</div>
+                            <div class="text-xs text-gray-500">{{ user.get_role_display }}</div>
+                        </div>
                     </div>
                 </div>
+                
+                <!-- Menu -->
+                <ul class="space-y-1">
+                    <!-- Dashboard - Visible pour tous -->
+                    <li>
+                        <a href="{% url 'core:dashboard' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if request.resolver_match.url_name == 'dashboard' %}bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-l-4 border-blue-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-tachometer-alt w-5"></i>
+                            <span class="ml-3">{% trans "Dashboard" %}</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Produits - Visible pour tous -->
+                    <li>
+                        <a href="{% url 'produits:list' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if 'produits' in request.resolver_match.namespace %}bg-gradient-to-r from-blue-50 to-blue-100 text-blue-700 border-l-4 border-blue-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-box w-5"></i>
+                            <span class="ml-3">{% trans "Produits" %}</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Stock - Visible pour ADMIN, GERANT, STOCKISTE -->
+                    {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'GERANT' or user.role == 'STOCKISTE' or user.can_manage_stock %}
+                    <li>
+                        <a href="{% url 'stocks:list' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if 'stocks' in request.resolver_match.namespace %}bg-gradient-to-r from-purple-50 to-purple-100 text-purple-700 border-l-4 border-purple-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-warehouse w-5"></i>
+                            <span class="ml-3">{% trans "Stock" %}</span>
+                            {% if not user.can_manage_stock %}
+                            <span class="ml-auto text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full">{% trans "Lecture seule" %}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Ventes - Visible pour ADMIN, GERANT, VENDEUR -->
+                    {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'GERANT' or user.role == 'VENDEUR' or user.can_manage_sales %}
+                    <li>
+                        <a href="{% url 'ventes:list' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if 'ventes' in request.resolver_match.namespace %}bg-gradient-to-r from-green-50 to-green-100 text-green-700 border-l-4 border-green-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-shopping-cart w-5"></i>
+                            <span class="ml-3">{% trans "Ventes" %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Fournisseurs - Visible pour tous (mais modification limitée) -->
+                    <li>
+                        <a href="{% url 'fournisseurs:list' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if 'fournisseurs' in request.resolver_match.namespace %}bg-gradient-to-r from-orange-50 to-orange-100 text-orange-700 border-l-4 border-orange-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-truck w-5"></i>
+                            <span class="ml-3">{% trans "Fournisseurs" %}</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Utilisateurs - Visible uniquement pour ADMIN et GERANT -->
+                    {% if user.is_superuser or user.role == 'ADMIN' or user.role == 'GERANT' or user.can_manage_users %}
+                    <li class="pt-4 border-t border-gray-200 mt-4">
+                        <div class="px-3 mb-2">
+                            <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Administration" %}</span>
+                        </div>
+                        <a href="{% url 'utilisateurs:list' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if 'utilisateurs' in request.resolver_match.namespace and request.resolver_match.url_name != 'profile' and request.resolver_match.url_name != 'profile_edit' %}bg-gradient-to-r from-indigo-50 to-indigo-100 text-indigo-700 border-l-4 border-indigo-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-users w-5"></i>
+                            <span class="ml-3">{% trans "Utilisateurs" %}</span>
+                            <span class="ml-auto text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">{% trans "Admin" %}</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    
+                    <!-- Profil - Visible pour tous -->
+                    <li class="pt-4 border-t border-gray-200 mt-4">
+                        <a href="{% url 'utilisateurs:profile' %}" 
+                           class="flex items-center px-3 py-2.5 text-base font-medium rounded-lg transition-colors {% if request.resolver_match.url_name == 'profile' or request.resolver_match.url_name == 'profile_edit' %}bg-gradient-to-r from-gray-50 to-gray-100 text-gray-700 border-l-4 border-gray-600{% else %}text-gray-700 hover:bg-gray-100{% endif %}">
+                            <i class="fas fa-user-circle w-5"></i>
+                            <span class="ml-3">{% trans "Mon Profil" %}</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </aside>
 
-        <!-- Mobile menu -->
-        <div class="hidden sm:hidden bg-white border-b border-gray-200" id="mobile-menu">
-            <div class="space-y-1 px-2 pt-2 pb-3">
-                <a href="{% url 'core:dashboard' %}" 
-                   class="{% if request.resolver_match.url_name == 'dashboard' %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
-                    <i class="fas fa-tachometer-alt mr-2"></i>
-                    Dashboard
-                </a>
-                <a href="{% url 'produits:list' %}" 
-                   class="{% if 'produits' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
-                    <i class="fas fa-box mr-2"></i>
-                    Produits
-                </a>
-                <a href="{% url 'stocks:list' %}" 
-                   class="{% if 'stocks' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
-                    <i class="fas fa-warehouse mr-2"></i>
-                    Stock
-                </a>
-                <a href="{% url 'ventes:list' %}" 
-                   class="{% if 'ventes' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
-                    <i class="fas fa-shopping-cart mr-2"></i>
-                    Ventes
-                </a>
-                <a href="{% url 'fournisseurs:list' %}" 
-                   class="{% if 'fournisseurs' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
-                    <i class="fas fa-truck mr-2"></i>
-                    Fournisseurs
-                </a>
-                <hr class="my-2">
-                <a href="{% url 'utilisateurs:profile' %}" 
-                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
-                    <i class="fas fa-user mr-2"></i>
-                    Mon profil
-                </a>
-                {% if user.is_superuser or user.role == 'ADMIN' %}
-                <a href="{% url 'utilisateurs:list' %}" 
-                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
-                    <i class="fas fa-users mr-2"></i>
-                    Utilisateurs
-                </a>
-                {% endif %}
-                <a href="{% url 'utilisateurs:logout' %}" 
-                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
-                    <i class="fas fa-sign-out-alt mr-2"></i>
-                    Déconnexion
-                </a>
-            </div>
-        </div>
+        <!-- Main content area -->
+        <div class="flex-1 flex flex-col lg:pl-64">
+            <!-- Navbar -->
+            <nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex h-16 justify-between">
+                        <!-- Mobile menu button -->
+                        <div class="flex items-center lg:hidden">
+                            <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" id="mobile-sidebar-button">
+                                <span class="sr-only">Open sidebar</span>
+                                <i class="fas fa-bars text-lg"></i>
+                            </button>
+                        </div>
 
-        <!-- Messages -->
-        {% if messages %}
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
-                {% for message in messages %}
-                    <div class="rounded-md p-4 mb-4 {% if message.tags == 'error' %}bg-red-50 border border-red-200{% elif message.tags == 'warning' %}bg-yellow-50 border border-yellow-200{% elif message.tags == 'success' %}bg-green-50 border border-green-200{% else %}bg-blue-50 border border-blue-200{% endif %}">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                {% if message.tags == 'error' %}
-                                    <i class="fas fa-exclamation-circle text-red-400"></i>
-                                {% elif message.tags == 'warning' %}
-                                    <i class="fas fa-exclamation-triangle text-yellow-400"></i>
-                                {% elif message.tags == 'success' %}
-                                    <i class="fas fa-check-circle text-green-400"></i>
-                                {% else %}
-                                    <i class="fas fa-info-circle text-blue-400"></i>
-                                {% endif %}
+                        <!-- Spacer pour mobile -->
+                        <div class="flex-1 flex items-center justify-center lg:justify-start">
+                            <span class="text-lg font-semibold text-gray-700 lg:hidden">Menu</span>
+                        </div>
+
+                        <!-- Right side: Language, Notifications and Profile -->
+                        <div class="flex items-center space-x-4">
+                            <!-- Language Selector -->
+                            <div class="relative">
+                                <form method="post" action="{% url 'core:set_language' %}" class="inline" id="language-form">
+                                    {% csrf_token %}
+                                    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden bg-white hover:bg-gray-50 transition-colors shadow-sm">
+                                        <i class="fas fa-globe text-gray-500 ml-3 mr-2"></i>
+                                        <select name="language" onchange="this.form.submit()" 
+                                                class="appearance-none bg-transparent border-none text-sm font-semibold text-gray-700 cursor-pointer focus:outline-none py-2 pr-3 pl-1">
+                                            <option value="fr" {% if LANGUAGE_CODE == 'fr' or not LANGUAGE_CODE %}selected{% endif %}>
+                                                🇫🇷 FR
+                                            </option>
+                                            <option value="en" {% if LANGUAGE_CODE == 'en' or LANGUAGE_CODE|slice:":2" == 'en' %}selected{% endif %}>
+                                                🇬🇧 EN
+                                            </option>
+                                        </select>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium {% if message.tags == 'error' %}text-red-800{% elif message.tags == 'warning' %}text-yellow-800{% elif message.tags == 'success' %}text-green-800{% else %}text-blue-800{% endif %}">
-                                    {{ message }}
-                                </p>
+                            
+                            <!-- Notifications -->
+                            <div class="relative">
+                                <button type="button" id="notification-button" class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg">
+                                    <i class="fas fa-bell text-xl"></i>
+                                    {% if alertes_count > 0 %}
+                                    <span class="sr-only">Notifications</span>
+                                    <div class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-1 -right-1">
+                                        {{ alertes_count }}
+                                    </div>
+                                    {% endif %}
+                                </button>
+                                <!-- Notifications dropdown -->
+                                <div id="notification-dropdown" class="hidden absolute right-0 mt-2 w-80 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="px-4 py-3 border-b border-gray-200">
+                                        <p class="text-sm font-semibold text-gray-900">{% trans "Notifications" %}</p>
+                                    </div>
+                                    <div class="py-1 max-h-60 overflow-y-auto">
+                                        {% if alertes_stock %}
+                                            {% for alerte in alertes_stock|slice:":5" %}
+                                            <a href="{% url 'produits:detail' alerte.produit.pk %}" class="flex items-start px-4 py-3 hover:bg-red-50 transition-colors">
+                                                <i class="fas fa-exclamation-triangle text-red-500 mr-3 mt-1"></i>
+                                                <div class="flex-1">
+                                                    <p class="text-sm font-medium text-gray-900">{% trans "Stock faible" %}</p>
+                                                    <p class="text-xs text-gray-600">{{ alerte.produit.nom }} ({{ alerte.stock_actuel }} {% trans "restants" %})</p>
+                                                </div>
+                                            </a>
+                                            {% endfor %}
+                                        {% else %}
+                                        <div class="px-4 py-8 text-center">
+                                            <i class="fas fa-bell-slash text-gray-300 text-3xl mb-2"></i>
+                                            <p class="text-sm text-gray-500">{% trans "Aucune notification" %}</p>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Profile dropdown -->
+                            <div class="relative">
+                                <button type="button" id="profile-button" class="flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg">
+                                    <div class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+                                        <span class="text-white text-sm font-bold">
+                                            {{ user.first_name|first|upper }}{{ user.last_name|first|upper }}
+                                        </span>
+                                    </div>
+                                    <div class="ml-2 hidden md:block text-left">
+                                        <div class="text-sm font-medium text-gray-900">{{ user.first_name }} {{ user.last_name }}</div>
+                                        <div class="text-xs text-gray-500">{{ user.get_role_display }}</div>
+                                    </div>
+                                    <i class="fas fa-chevron-down ml-2 text-gray-400 hidden md:block"></i>
+                                </button>
+                                <!-- Profile dropdown menu -->
+                                <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1">
+                                        <a href="{% url 'utilisateurs:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                            <i class="fas fa-user mr-2"></i>{% trans "Mon Profil" %}
+                                        </a>
+                                        {% if user.is_superuser or user.can_manage_users %}
+                                        <a href="{% url 'utilisateurs:list' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                            <i class="fas fa-users mr-2"></i>{% trans "Utilisateurs" %}
+                                        </a>
+                                        {% endif %}
+                                        <hr class="my-1">
+                                        <a href="{% url 'utilisateurs:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors">
+                                            <i class="fas fa-sign-out-alt mr-2"></i>{% trans "Déconnexion" %}
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% endif %}
+                </div>
+            </nav>
 
-        <!-- Main content -->
-        <main class="py-6">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                {% block content %}{% endblock %}
-            </div>
-        </main>
+            <!-- Messages -->
+            {% if messages %}
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 w-full">
+                    {% for message in messages %}
+                        <div class="rounded-md p-4 mb-4 {% if message.tags == 'error' %}bg-red-50 border border-red-200{% elif message.tags == 'warning' %}bg-yellow-50 border border-yellow-200{% elif message.tags == 'success' %}bg-green-50 border border-green-200{% else %}bg-blue-50 border border-blue-200{% endif %}">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    {% if message.tags == 'error' %}
+                                        <i class="fas fa-exclamation-circle text-red-400"></i>
+                                    {% elif message.tags == 'warning' %}
+                                        <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                                    {% elif message.tags == 'success' %}
+                                        <i class="fas fa-check-circle text-green-400"></i>
+                                    {% else %}
+                                        <i class="fas fa-info-circle text-blue-400"></i>
+                                    {% endif %}
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium {% if message.tags == 'error' %}text-red-800{% elif message.tags == 'warning' %}text-yellow-800{% elif message.tags == 'success' %}text-green-800{% else %}text-blue-800{% endif %}">
+                                        {{ message }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Main content -->
+            <main class="flex-1 py-6">
+                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
     </div>
 
     <!-- Flowbite JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-    
+
     <!-- Custom JS -->
     <script>
-        // Profile dropdown toggle
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userMenu = document.getElementById('user-menu');
+        // Mobile sidebar toggle
+        const mobileSidebarButton = document.getElementById('mobile-sidebar-button');
+        const sidebar = document.getElementById('sidebar');
         
-        if (userMenuButton && userMenu) {
-            userMenuButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                userMenu.classList.toggle('hidden');
+        if (mobileSidebarButton && sidebar) {
+            mobileSidebarButton.addEventListener('click', function() {
+                sidebar.classList.toggle('-translate-x-full');
             });
-
-            // Close dropdown when clicking outside
+            
+            // Close sidebar when clicking outside on mobile
             document.addEventListener('click', function(event) {
-                if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
-                    userMenu.classList.add('hidden');
+                if (window.innerWidth < 1024) {
+                    if (!sidebar.contains(event.target) && !mobileSidebarButton.contains(event.target)) {
+                        sidebar.classList.add('-translate-x-full');
+                    }
                 }
             });
         }
 
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        // Notifications dropdown
+        const notificationButton = document.getElementById('notification-button');
+        const notificationDropdown = document.getElementById('notification-dropdown');
         
-        if (mobileMenuButton && mobileMenu && mobileMenuIcon) {
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-                if (mobileMenu.classList.contains('hidden')) {
-                    mobileMenuIcon.classList.remove('fa-times');
-                    mobileMenuIcon.classList.add('fa-bars');
-                } else {
-                    mobileMenuIcon.classList.remove('fa-bars');
-                    mobileMenuIcon.classList.add('fa-times');
+        if (notificationButton && notificationDropdown) {
+            notificationButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (!notificationButton.contains(event.target) && !notificationDropdown.contains(event.target)) {
+                    notificationDropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        // Profile dropdown
+        const profileButton = document.getElementById('profile-button');
+        const profileDropdown = document.getElementById('profile-dropdown');
+        
+        if (profileButton && profileDropdown) {
+            profileButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('hidden');
+            });
+            
+            document.addEventListener('click', function(event) {
+                if (!profileButton.contains(event.target) && !profileDropdown.contains(event.target)) {
+                    profileDropdown.classList.add('hidden');
                 }
             });
         }
     </script>
-    
+
     {% block extra_js %}{% endblock %}
 </body>
 </html>

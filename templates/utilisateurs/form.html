@@ -4,131 +4,188 @@
 
 {% block content %}
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="md:flex md:items-center md:justify-between">
-        <div class="min-w-0 flex-1">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                <i class="fas fa-user-plus mr-2"></i>
-                {% if user_detail %}Modifier l'Utilisateur{% else %}Nouvel Utilisateur{% endif %}
-            </h2>
-        </div>
-        <div class="mt-4 flex md:ml-4 md:mt-0">
-            <a href="{% url 'utilisateurs:list' %}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Retour à la liste
-            </a>
+    <!-- Header avec gradient -->
+    <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="min-w-0 flex-1">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    <i class="fas fa-user-plus mr-3"></i>
+                    {% if user_detail %}Modifier l'Utilisateur{% else %}Nouvel Utilisateur{% endif %}
+                </h2>
+                <p class="mt-2 text-indigo-100">
+                    {% if user_detail %}Modifiez les informations de l'utilisateur{% else %}Créez un nouveau compte utilisateur{% endif %}
+                </p>
+            </div>
+            <div class="mt-4 flex md:ml-4 md:mt-0">
+                <a href="{% url 'utilisateurs:list' %}" 
+                   class="inline-flex items-center px-5 py-3 border-2 border-white rounded-lg text-base font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour à la liste
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Formulaire -->
-    <div class="bg-white shadow rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-            <form method="post" class="space-y-6">
+    <!-- Formulaire amélioré -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-8 sm:p-8">
+            <form method="post" class="space-y-8">
                 {% csrf_token %}
                 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <!-- Nom d'utilisateur -->
-                    <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700">
-                            Nom d'utilisateur *
-                        </label>
-                        <input type="text" name="username" id="username" required
-                               value="{% if user_detail %}{{ user_detail.username }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                <!-- Section Identifiants -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-key text-blue-600 mr-2"></i>
+                        Identifiants de Connexion
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Nom d'utilisateur -->
+                        <div>
+                            <label for="username" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Nom d'utilisateur <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" name="username" id="username" required
+                                       value="{% if user_detail %}{{ user_detail.username }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="nom_utilisateur">
+                            </div>
+                        </div>
 
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email *
-                        </label>
-                        <input type="email" name="email" id="email" required
-                               value="{% if user_detail %}{{ user_detail.email }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope text-green-600 mr-1"></i>Email <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-at text-gray-400"></i>
+                                </div>
+                                <input type="email" name="email" id="email" required
+                                       value="{% if user_detail %}{{ user_detail.email }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                                       placeholder="utilisateur@example.com">
+                            </div>
+                        </div>
 
-                    <!-- Prénom -->
-                    <div>
-                        <label for="first_name" class="block text-sm font-medium text-gray-700">
-                            Prénom *
-                        </label>
-                        <input type="text" name="first_name" id="first_name" required
-                               value="{% if user_detail %}{{ user_detail.first_name }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Nom -->
-                    <div>
-                        <label for="last_name" class="block text-sm font-medium text-gray-700">
-                            Nom *
-                        </label>
-                        <input type="text" name="last_name" id="last_name" required
-                               value="{% if user_detail %}{{ user_detail.last_name }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Rôle -->
-                    <div>
-                        <label for="role" class="block text-sm font-medium text-gray-700">
-                            Rôle *
-                        </label>
-                        <select name="role" id="role" required
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            {% for code, label in role_choices %}
-                                <option value="{{ code }}" 
-                                        {% if user_detail and user_detail.role == code %}selected{% elif not user_detail and code == 'VENDEUR' %}selected{% endif %}>
-                                    {{ label }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- Mot de passe -->
-                    <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700">
-                            {% if user_detail %}Nouveau Mot de passe{% else %}Mot de passe *{% endif %}
-                        </label>
-                        <input type="password" name="password" id="password"
-                               {% if not user_detail %}required{% endif %}
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="{% if user_detail %}Laisser vide pour ne pas modifier{% else %}Mot de passe{% endif %}">
-                        {% if user_detail %}
-                            <p class="mt-1 text-xs text-gray-500">Laisser vide pour conserver le mot de passe actuel</p>
-                        {% endif %}
-                    </div>
-
-                    <!-- Téléphone -->
-                    <div>
-                        <label for="telephone" class="block text-sm font-medium text-gray-700">
-                            Téléphone
-                        </label>
-                        <input type="tel" name="telephone" id="telephone"
-                               value="{% if user_detail %}{{ user_detail.telephone|default:'' }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="+33 1 23 45 67 89">
-                    </div>
-
-                    <!-- Adresse -->
-                    <div class="sm:col-span-2">
-                        <label for="adresse" class="block text-sm font-medium text-gray-700">
-                            Adresse
-                        </label>
-                        <textarea name="adresse" id="adresse" rows="2"
-                                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{% if user_detail %}{{ user_detail.adresse|default:'' }}{% endif %}</textarea>
+                        <!-- Mot de passe -->
+                        <div class="sm:col-span-2">
+                            <label for="password" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-lock text-red-600 mr-1"></i>
+                                {% if user_detail %}Nouveau Mot de passe{% else %}Mot de passe <span class="text-red-500">*</span>{% endif %}
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-key text-gray-400"></i>
+                                </div>
+                                <input type="password" name="password" id="password"
+                                       {% if not user_detail %}required{% endif %}
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all"
+                                       placeholder="{% if user_detail %}Laisser vide pour ne pas modifier{% else %}Mot de passe sécurisé{% endif %}">
+                            </div>
+                            {% if user_detail %}
+                                <p class="mt-2 text-xs text-gray-500">
+                                    <i class="fas fa-info-circle mr-1"></i>Laisser vide pour conserver le mot de passe actuel
+                                </p>
+                            {% else %}
+                                <p class="mt-2 text-xs text-gray-500">
+                                    <i class="fas fa-shield-alt mr-1"></i>Utilisez au moins 8 caractères avec des lettres et des chiffres
+                                </p>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 
-                <!-- Boutons -->
-                <div class="flex justify-end space-x-3">
+                <!-- Section Informations personnelles -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-user-circle text-purple-600 mr-2"></i>
+                        Informations Personnelles
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Prénom -->
+                        <div>
+                            <label for="first_name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user text-purple-600 mr-1"></i>Prénom <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="first_name" id="first_name" required
+                                   value="{% if user_detail %}{{ user_detail.first_name }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                                   placeholder="Prénom">
+                        </div>
+
+                        <!-- Nom -->
+                        <div>
+                            <label for="last_name" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user text-indigo-600 mr-1"></i>Nom <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="last_name" id="last_name" required
+                                   value="{% if user_detail %}{{ user_detail.last_name }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                                   placeholder="Nom">
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div>
+                            <label for="telephone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-phone text-blue-600 mr-1"></i>Téléphone
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="tel" name="telephone" id="telephone"
+                                       value="{% if user_detail %}{{ user_detail.telephone|default:'' }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="+33 1 23 45 67 89">
+                            </div>
+                        </div>
+
+                        <!-- Rôle -->
+                        <div>
+                            <label for="role" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user-tag text-indigo-600 mr-1"></i>Rôle <span class="text-red-500">*</span>
+                            </label>
+                            <select name="role" id="role" required
+                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all">
+                                {% for code, label in role_choices %}
+                                    <option value="{{ code }}" 
+                                            {% if user_detail and user_detail.role == code %}selected{% elif not user_detail and code == 'VENDEUR' %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <p class="mt-1 text-xs text-gray-500">Détermine les permissions d'accès dans l'application</p>
+                        </div>
+
+                        <!-- Adresse -->
+                        <div class="sm:col-span-2">
+                            <label for="adresse" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt text-red-600 mr-1"></i>Adresse
+                            </label>
+                            <textarea name="adresse" id="adresse" rows="2"
+                                      class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                                      placeholder="Adresse complète...">{% if user_detail %}{{ user_detail.adresse|default:'' }}{% endif %}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
                     <a href="{% url 'utilisateurs:list' %}" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                       class="inline-flex justify-center items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all transform hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>
                         Annuler
                     </a>
                     <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="inline-flex justify-center items-center px-8 py-3 border border-transparent rounded-xl text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-lg transition-all transform hover:scale-105">
                         <i class="fas fa-save mr-2"></i>
-                        {% if user_detail %}Mettre à jour{% else %}Créer{% endif %}
+                        {% if user_detail %}Mettre à jour{% else %}Créer l'utilisateur{% endif %}
                     </button>
                 </div>
             </form>
@@ -136,4 +193,3 @@
     </div>
 </div>
 {% endblock %}
-

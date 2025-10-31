@@ -4,123 +4,169 @@
 
 {% block content %}
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="md:flex md:items-center md:justify-between">
-        <div class="min-w-0 flex-1">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                <i class="fas fa-shopping-cart mr-2"></i>
-                {% if vente %}Modifier la Vente{% else %}Nouvelle Vente{% endif %}
-            </h2>
-        </div>
-        <div class="mt-4 flex md:ml-4 md:mt-0">
-            <a href="{% url 'ventes:list' %}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Retour à la liste
-            </a>
+    <!-- Header avec gradient -->
+    <div class="bg-gradient-to-r from-green-600 to-teal-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="min-w-0 flex-1">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    <i class="fas fa-shopping-cart mr-3"></i>
+                    {% if vente %}Modifier la Vente{% else %}Nouvelle Vente{% endif %}
+                </h2>
+                <p class="mt-2 text-green-100">
+                    {% if vente %}Modifiez les informations de la vente{% else %}Créez une nouvelle vente{% endif %}
+                </p>
+            </div>
+            <div class="mt-4 flex md:ml-4 md:mt-0">
+                <a href="{% url 'ventes:list' %}" 
+                   class="inline-flex items-center px-5 py-3 border-2 border-white rounded-lg text-base font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour à la liste
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Formulaire -->
-    <div class="bg-white shadow rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-            <form method="post" class="space-y-6">
+    <!-- Formulaire amélioré -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-8 sm:p-8">
+            <form method="post" class="space-y-8">
                 {% csrf_token %}
                 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <!-- Nom Client -->
-                    <div>
-                        <label for="client_nom" class="block text-sm font-medium text-gray-700">
-                            Nom du Client *
-                        </label>
-                        <input type="text" name="client_nom" id="client_nom" required
-                               value="{% if vente %}{{ vente.client_nom }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                <!-- Section Informations client -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-user text-blue-600 mr-2"></i>
+                        Informations Client
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Nom Client -->
+                        <div>
+                            <label for="client_nom" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Nom du Client <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" name="client_nom" id="client_nom" required
+                                       value="{% if vente %}{{ vente.client_nom }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="Nom du client">
+                            </div>
+                        </div>
 
-                    <!-- Email Client -->
-                    <div>
-                        <label for="client_email" class="block text-sm font-medium text-gray-700">
-                            Email du Client
-                        </label>
-                        <input type="email" name="client_email" id="client_email"
-                               value="{% if vente %}{{ vente.client_email }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                        <!-- Email Client -->
+                        <div>
+                            <label for="client_email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Email du Client
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" name="client_email" id="client_email"
+                                       value="{% if vente %}{{ vente.client_email }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="client@email.com">
+                            </div>
+                        </div>
 
-                    <!-- Téléphone Client -->
-                    <div>
-                        <label for="client_telephone" class="block text-sm font-medium text-gray-700">
-                            Téléphone du Client
-                        </label>
-                        <input type="tel" name="client_telephone" id="client_telephone"
-                               value="{% if vente %}{{ vente.client_telephone }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <!-- Téléphone Client -->
+                        <div>
+                            <label for="client_telephone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Téléphone du Client
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="tel" name="client_telephone" id="client_telephone"
+                                       value="{% if vente %}{{ vente.client_telephone }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="+33 1 23 45 67 89">
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Statut -->
-                    {% if vente %}
-                    <div>
-                        <label for="statut" class="block text-sm font-medium text-gray-700">
-                            Statut
-                        </label>
-                        <select name="statut" id="statut"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            {% for code, label in statut_choices %}
-                                <option value="{{ code }}" {% if vente.statut == code %}selected{% endif %}>
-                                    {{ label }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    {% endif %}
+                <!-- Section Paiement et Statut -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-credit-card text-green-600 mr-2"></i>
+                        Paiement et Statut
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Mode de Paiement -->
+                        <div>
+                            <label for="mode_paiement" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Mode de Paiement
+                            </label>
+                            <select name="mode_paiement" id="mode_paiement"
+                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="ESPECES" {% if vente and vente.mode_paiement == 'ESPECES' %}selected{% endif %}>Espèces</option>
+                                <option value="CARTE" {% if vente and vente.mode_paiement == 'CARTE' %}selected{% endif %}>Carte bancaire</option>
+                                <option value="CHEQUE" {% if vente and vente.mode_paiement == 'CHEQUE' %}selected{% endif %}>Chèque</option>
+                                <option value="VIREMENT" {% if vente and vente.mode_paiement == 'VIREMENT' %}selected{% endif %}>Virement</option>
+                            </select>
+                        </div>
 
-                    <!-- Mode de Paiement -->
-                    <div>
-                        <label for="mode_paiement" class="block text-sm font-medium text-gray-700">
-                            Mode de Paiement
-                        </label>
-                        <select name="mode_paiement" id="mode_paiement"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option value="ESPECES" {% if vente and vente.mode_paiement == 'ESPECES' %}selected{% endif %}>Espèces</option>
-                            <option value="CARTE" {% if vente and vente.mode_paiement == 'CARTE' %}selected{% endif %}>Carte bancaire</option>
-                            <option value="CHEQUE" {% if vente and vente.mode_paiement == 'CHEQUE' %}selected{% endif %}>Chèque</option>
-                            <option value="VIREMENT" {% if vente and vente.mode_paiement == 'VIREMENT' %}selected{% endif %}>Virement</option>
-                        </select>
-                    </div>
+                        <!-- Statut -->
+                        {% if vente %}
+                        <div>
+                            <label for="statut" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Statut
+                            </label>
+                            <select name="statut" id="statut"
+                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                {% for code, label in statut_choices %}
+                                    <option value="{{ code }}" {% if vente.statut == code %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                    <!-- Remise -->
-                    {% if vente %}
-                    <div>
-                        <label for="remise" class="block text-sm font-medium text-gray-700">
-                            Remise (€)
-                        </label>
-                        <input type="number" name="remise" id="remise" step="0.01" min="0"
-                               value="{% if vente %}{{ vente.remise }}{% else %}0{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <!-- Remise -->
+                        <div>
+                            <label for="remise" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-percent text-red-600 mr-1"></i>Remise (FCFA)
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 font-semibold">FCFA</span>
+                                </div>
+                                <input type="number" name="remise" id="remise" step="0.01" min="0"
+                                       value="{% if vente %}{{ vente.remise }}{% else %}0{% endif %}"
+                                       class="block w-full pl-16 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all">
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
-                    {% endif %}
                 </div>
 
                 <!-- Commentaire -->
                 <div>
-                    <label for="commentaire" class="block text-sm font-medium text-gray-700">
-                        Commentaire
+                    <label for="commentaire" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-comment text-gray-600 mr-1"></i>Commentaire
                     </label>
-                    <textarea name="commentaire" id="commentaire" rows="3"
-                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{% if vente %}{{ vente.commentaire }}{% endif %}</textarea>
+                    <textarea name="commentaire" id="commentaire" rows="4"
+                              class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                              placeholder="Notes sur la vente...">{% if vente %}{{ vente.commentaire }}{% endif %}</textarea>
                 </div>
 
-                <!-- Boutons -->
-                <div class="flex justify-end space-x-3">
+                <!-- Boutons d'action -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
                     <a href="{% url 'ventes:list' %}" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                       class="inline-flex justify-center items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all transform hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>
                         Annuler
                     </a>
                     <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="inline-flex justify-center items-center px-8 py-3 border border-transparent rounded-xl text-base font-semibold text-white bg-gradient-to-r from-green-600 to-teal-600 hover:from-green-700 hover:to-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg transition-all transform hover:scale-105">
                         <i class="fas fa-save mr-2"></i>
-                        {% if vente %}Mettre à jour{% else %}Créer{% endif %}
+                        {% if vente %}Mettre à jour{% else %}Créer la vente{% endif %}
                     </button>
                 </div>
             </form>
@@ -130,38 +176,39 @@
     {% if vente %}
     <!-- Lignes de vente existantes -->
     {% if vente.lignes.all %}
-    <div class="bg-white shadow rounded-lg overflow-hidden">
-        <div class="px-4 py-5 sm:p-6">
-            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
-                <i class="fas fa-list text-green-500 mr-2"></i>
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-6 sm:p-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center pb-4 border-b-2 border-gray-200">
+                <i class="fas fa-list text-green-600 mr-2"></i>
                 Articles Actuels
             </h3>
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gradient-to-r from-gray-50 to-green-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produit</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix Unitaire</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Produit</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Quantité</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Prix Unitaire</th>
+                            <th class="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Montant</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         {% for ligne in vente.lignes.all %}
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ ligne.produit.nom }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ligne.quantite }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ligne.prix_unitaire|floatformat:2 }} €</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ ligne.montant_ligne|floatformat:2 }} €</td>
+                        <tr class="hover:bg-green-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ ligne.produit.nom }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ ligne.quantite }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ ligne.prix_unitaire|floatformat:2 }} FCFA</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-green-600">{{ ligne.montant_ligne|floatformat:2 }} FCFA</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <div class="mt-4 text-right">
-                <p class="text-lg font-semibold text-gray-900">
-                    Total: {{ vente.montant_final|floatformat:2 }} €
-                </p>
+            <div class="mt-6 pt-6 border-t-2 border-gray-200 text-right">
+                <div class="inline-flex items-center space-x-4 bg-gradient-to-r from-green-50 to-teal-50 px-6 py-4 rounded-xl border-2 border-green-200">
+                    <span class="text-lg font-semibold text-gray-700">Total:</span>
+                    <span class="text-2xl font-bold text-green-600">{{ vente.montant_final|floatformat:2 }} FCFA</span>
+                </div>
             </div>
         </div>
     </div>
@@ -169,4 +216,3 @@
     {% endif %}
 </div>
 {% endblock %}
-

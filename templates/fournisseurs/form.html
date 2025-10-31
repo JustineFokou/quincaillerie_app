@@ -4,165 +4,216 @@
 
 {% block content %}
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="md:flex md:items-center md:justify-between">
-        <div class="min-w-0 flex-1">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                <i class="fas fa-truck mr-2"></i>
-                {% if fournisseur %}Modifier le Fournisseur{% else %}Nouveau Fournisseur{% endif %}
-            </h2>
-        </div>
-        <div class="mt-4 flex md:ml-4 md:mt-0">
-            <a href="{% url 'fournisseurs:list' %}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Retour à la liste
-            </a>
+    <!-- Header avec gradient -->
+    <div class="bg-gradient-to-r from-orange-600 to-red-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="min-w-0 flex-1">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    <i class="fas fa-truck mr-3"></i>
+                    {% if fournisseur %}Modifier le Fournisseur{% else %}Nouveau Fournisseur{% endif %}
+                </h2>
+                <p class="mt-2 text-orange-100">
+                    {% if fournisseur %}Modifiez les informations du fournisseur{% else %}Ajoutez un nouveau fournisseur{% endif %}
+                </p>
+            </div>
+            <div class="mt-4 flex md:ml-4 md:mt-0">
+                <a href="{% url 'fournisseurs:list' %}" 
+                   class="inline-flex items-center px-5 py-3 border-2 border-white rounded-lg text-base font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour à la liste
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Formulaire -->
-    <div class="bg-white shadow rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-            <form method="post" class="space-y-6">
+    <!-- Formulaire amélioré -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-8 sm:p-8">
+            <form method="post" class="space-y-8">
                 {% csrf_token %}
                 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <!-- Nom -->
-                    <div>
-                        <label for="nom" class="block text-sm font-medium text-gray-700">
-                            Nom du Fournisseur *
-                        </label>
-                        <input type="text" name="nom" id="nom" required
-                               value="{% if fournisseur %}{{ fournisseur.nom }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                <!-- Section Informations principales -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-info-circle text-orange-600 mr-2"></i>
+                        Informations Principales
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Nom -->
+                        <div>
+                            <label for="nom" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Nom du Fournisseur <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-building text-gray-400"></i>
+                                </div>
+                                <input type="text" name="nom" id="nom" required
+                                       value="{% if fournisseur %}{{ fournisseur.nom }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                                       placeholder="Nom du fournisseur">
+                            </div>
+                        </div>
 
-                    <!-- Contact -->
-                    <div>
-                        <label for="contact" class="block text-sm font-medium text-gray-700">
-                            Contact
-                        </label>
-                        <input type="text" name="contact" id="contact"
-                               value="{% if fournisseur %}{{ fournisseur.contact }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="Nom du contact">
+                        <!-- Contact -->
+                        <div>
+                            <label for="contact" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-user text-blue-600 mr-1"></i>Contact Principal
+                            </label>
+                            <input type="text" name="contact" id="contact"
+                                   value="{% if fournisseur %}{{ fournisseur.contact }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                   placeholder="Nom du contact">
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Email -->
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">
-                            Email
-                        </label>
-                        <input type="email" name="email" id="email"
-                               value="{% if fournisseur %}{{ fournisseur.email }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="contact@fournisseur.com">
+                <!-- Section Coordonnées -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-address-card text-blue-600 mr-2"></i>
+                        Coordonnées
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-envelope text-green-600 mr-1"></i>Email
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-at text-gray-400"></i>
+                                </div>
+                                <input type="email" name="email" id="email"
+                                       value="{% if fournisseur %}{{ fournisseur.email }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all"
+                                       placeholder="contact@fournisseur.com">
+                            </div>
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div>
+                            <label for="telephone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-phone text-purple-600 mr-1"></i>Téléphone
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input type="tel" name="telephone" id="telephone"
+                                       value="{% if fournisseur %}{{ fournisseur.telephone }}{% endif %}"
+                                       class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                                       placeholder="+33 1 23 45 67 89">
+                            </div>
+                        </div>
+
+                        <!-- Adresse -->
+                        <div class="sm:col-span-2">
+                            <label for="adresse" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt text-red-600 mr-1"></i>Adresse
+                            </label>
+                            <input type="text" name="adresse" id="adresse"
+                                   value="{% if fournisseur %}{{ fournisseur.adresse }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                   placeholder="Numéro et nom de rue">
+                        </div>
+
+                        <!-- Ville -->
+                        <div>
+                            <label for="ville" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-city text-indigo-600 mr-1"></i>Ville
+                            </label>
+                            <input type="text" name="ville" id="ville"
+                                   value="{% if fournisseur %}{{ fournisseur.ville }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
+
+                        <!-- Code Postal -->
+                        <div>
+                            <label for="code_postal" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-mail-bulk text-blue-600 mr-1"></i>Code Postal
+                            </label>
+                            <input type="text" name="code_postal" id="code_postal"
+                                   value="{% if fournisseur %}{{ fournisseur.code_postal }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
+
+                        <!-- Pays -->
+                        <div class="sm:col-span-2">
+                            <label for="pays" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-globe text-orange-600 mr-1"></i>Pays
+                            </label>
+                            <input type="text" name="pays" id="pays" value="{% if fournisseur %}{{ fournisseur.pays }}{% else %}France{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Téléphone -->
-                    <div>
-                        <label for="telephone" class="block text-sm font-medium text-gray-700">
-                            Téléphone
-                        </label>
-                        <input type="tel" name="telephone" id="telephone"
-                               value="{% if fournisseur %}{{ fournisseur.telephone }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="+33 1 23 45 67 89">
-                    </div>
+                <!-- Section Informations commerciales -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-file-contract text-purple-600 mr-2"></i>
+                        Informations Commerciales
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Numéro TVA -->
+                        <div>
+                            <label for="numero_tva" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-receipt text-purple-600 mr-1"></i>Numéro TVA
+                            </label>
+                            <input type="text" name="numero_tva" id="numero_tva"
+                                   value="{% if fournisseur %}{{ fournisseur.numero_tva }}{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                   placeholder="FR12345678901">
+                        </div>
 
-                    <!-- Adresse -->
-                    <div class="sm:col-span-2">
-                        <label for="adresse" class="block text-sm font-medium text-gray-700">
-                            Adresse
-                        </label>
-                        <input type="text" name="adresse" id="adresse"
-                               value="{% if fournisseur %}{{ fournisseur.adresse }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="Numéro et nom de rue">
-                    </div>
+                        <!-- Conditions de Paiement -->
+                        <div>
+                            <label for="conditions_paiement" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-money-bill-wave text-green-600 mr-1"></i>Conditions de Paiement
+                            </label>
+                            <input type="text" name="conditions_paiement" id="conditions_paiement"
+                                   value="{% if fournisseur %}{{ fournisseur.conditions_paiement }}{% else %}30 jours{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                   placeholder="30 jours">
+                        </div>
 
-                    <!-- Ville -->
-                    <div>
-                        <label for="ville" class="block text-sm font-medium text-gray-700">
-                            Ville
-                        </label>
-                        <input type="text" name="ville" id="ville"
-                               value="{% if fournisseur %}{{ fournisseur.ville }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Code Postal -->
-                    <div>
-                        <label for="code_postal" class="block text-sm font-medium text-gray-700">
-                            Code Postal
-                        </label>
-                        <input type="text" name="code_postal" id="code_postal"
-                               value="{% if fournisseur %}{{ fournisseur.code_postal }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Pays -->
-                    <div>
-                        <label for="pays" class="block text-sm font-medium text-gray-700">
-                            Pays
-                        </label>
-                        <input type="text" name="pays" id="pays" value="{% if fournisseur %}{{ fournisseur.pays }}{% else %}France{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <!-- Numéro TVA -->
-                    <div>
-                        <label for="numero_tva" class="block text-sm font-medium text-gray-700">
-                            Numéro TVA
-                        </label>
-                        <input type="text" name="numero_tva" id="numero_tva"
-                               value="{% if fournisseur %}{{ fournisseur.numero_tva }}{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="FR12345678901">
-                    </div>
-
-                    <!-- Conditions de Paiement -->
-                    <div>
-                        <label for="conditions_paiement" class="block text-sm font-medium text-gray-700">
-                            Conditions de Paiement
-                        </label>
-                        <input type="text" name="conditions_paiement" id="conditions_paiement"
-                               value="{% if fournisseur %}{{ fournisseur.conditions_paiement }}{% else %}30 jours{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="30 jours">
-                    </div>
-
-                    <!-- Délai de Livraison -->
-                    <div>
-                        <label for="delai_livraison" class="block text-sm font-medium text-gray-700">
-                            Délai de Livraison (jours)
-                        </label>
-                        <input type="number" name="delai_livraison" id="delai_livraison" min="0"
-                               value="{% if fournisseur %}{{ fournisseur.delai_livraison }}{% else %}7{% endif %}"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        <!-- Délai de Livraison -->
+                        <div>
+                            <label for="delai_livraison" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-clock text-orange-600 mr-1"></i>Délai de Livraison (jours)
+                            </label>
+                            <input type="number" name="delai_livraison" id="delai_livraison" min="0"
+                                   value="{% if fournisseur %}{{ fournisseur.delai_livraison }}{% else %}7{% endif %}"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                        </div>
                     </div>
                 </div>
 
                 <!-- Note -->
                 <div>
-                    <label for="note" class="block text-sm font-medium text-gray-700">
-                        Notes
+                    <label for="note" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-sticky-note text-gray-600 mr-1"></i>Notes
                     </label>
-                    <textarea name="note" id="note" rows="3"
-                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{% if fournisseur %}{{ fournisseur.note }}{% endif %}</textarea>
+                    <textarea name="note" id="note" rows="4"
+                              class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                              placeholder="Notes supplémentaires sur ce fournisseur...">{% if fournisseur %}{{ fournisseur.note }}{% endif %}</textarea>
                 </div>
 
-                <!-- Boutons -->
-                <div class="flex justify-end space-x-3">
+                <!-- Boutons d'action -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
                     <a href="{% url 'fournisseurs:list' %}" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                       class="inline-flex justify-center items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all transform hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>
                         Annuler
                     </a>
                     <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="inline-flex justify-center items-center px-8 py-3 border border-transparent rounded-xl text-base font-semibold text-white bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 shadow-lg transition-all transform hover:scale-105">
                         <i class="fas fa-save mr-2"></i>
-                        {% if fournisseur %}Mettre à jour{% else %}Créer{% endif %}
+                        {% if fournisseur %}Mettre à jour{% else %}Créer le fournisseur{% endif %}
                     </button>
                 </div>
             </form>
@@ -170,4 +221,3 @@
     </div>
 </div>
 {% endblock %}
-

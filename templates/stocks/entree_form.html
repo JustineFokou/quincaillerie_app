@@ -4,112 +4,147 @@
 
 {% block content %}
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="md:flex md:items-center md:justify-between">
-        <div class="min-w-0 flex-1">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                <i class="fas fa-arrow-up mr-2 text-green-600"></i>
-                Entrée de Stock
-            </h2>
-        </div>
-        <div class="mt-4 flex md:ml-4 md:mt-0">
-            <a href="{% url 'stocks:list' %}" 
-               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <i class="fas fa-arrow-left mr-2"></i>
-                Retour aux mouvements
-            </a>
+    <!-- Header avec gradient -->
+    <div class="bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="min-w-0 flex-1">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    <i class="fas fa-arrow-up mr-3"></i>
+                    Entrée de Stock
+                </h2>
+                <p class="mt-2 text-green-100">Enregistrez une nouvelle entrée de stock</p>
+            </div>
+            <div class="mt-4 flex md:ml-4 md:mt-0">
+                <a href="{% url 'stocks:list' %}" 
+                   class="inline-flex items-center px-5 py-3 border-2 border-white rounded-lg text-base font-medium text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour aux mouvements
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Formulaire -->
-    <div class="bg-white shadow rounded-lg">
-        <div class="px-4 py-5 sm:p-6">
-            <form method="post" class="space-y-6">
+    <!-- Formulaire amélioré -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-8 sm:p-8">
+            <form method="post" class="space-y-8">
                 {% csrf_token %}
                 
-                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <!-- Produit -->
-                    <div>
-                        <label for="produit" class="block text-sm font-medium text-gray-700">
-                            Produit *
-                        </label>
-                        <select name="produit" id="produit" required
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Sélectionner un produit</option>
-                            {% for produit in produits %}
-                                <option value="{{ produit.id }}">
-                                    {{ produit.code_produit }} - {{ produit.nom }}
-                                    {% if produit.stock_actuel is not None %}
-                                        (Stock actuel: {{ produit.stock_actuel }})
-                                    {% endif %}
-                                </option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                <!-- Section Produit -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-box text-blue-600 mr-2"></i>
+                        Informations Produit
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Produit -->
+                        <div class="sm:col-span-2">
+                            <label for="produit" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Produit <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-box text-gray-400"></i>
+                                </div>
+                                <select name="produit" id="produit" required
+                                        class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                    <option value="">Sélectionner un produit</option>
+                                    {% for produit in produits %}
+                                        <option value="{{ produit.id }}"
+                                                {% if request.GET.produit == produit.id|stringformat:"s" %}selected{% endif %}>
+                                            {{ produit.code_produit }} - {{ produit.nom }}
+                                            {% if produit.stock_actuel is not None %}
+                                                (Stock actuel: {{ produit.stock_actuel }})
+                                            {% endif %}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
 
-                    <!-- Quantité -->
-                    <div>
-                        <label for="quantite" class="block text-sm font-medium text-gray-700">
-                            Quantité *
-                        </label>
-                        <input type="number" name="quantite" id="quantite" required min="1"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                        <!-- Quantité -->
+                        <div>
+                            <label for="quantite" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-calculator text-green-600 mr-1"></i>Quantité <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="quantite" id="quantite" required min="1"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all">
+                        </div>
 
-                    <!-- Référence -->
-                    <div>
-                        <label for="reference" class="block text-sm font-medium text-gray-700">
-                            Référence (Facture, Bon de livraison...)
-                        </label>
-                        <input type="text" name="reference" id="reference"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                               placeholder="Ex: FAC-2024-001">
+                        <!-- Prix Unitaire -->
+                        <div>
+                            <label for="prix_unitaire" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-money-bill-wave text-blue-600 mr-1"></i>Prix Unitaire (FCFA)
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <span class="text-gray-500 font-semibold">FCFA</span>
+                                </div>
+                                <input type="number" name="prix_unitaire" id="prix_unitaire" step="0.01"
+                                       class="block w-full pl-16 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                       placeholder="0.00">
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Prix Unitaire -->
-                    <div>
-                        <label for="prix_unitaire" class="block text-sm font-medium text-gray-700">
-                            Prix Unitaire (€)
-                        </label>
-                        <input type="number" name="prix_unitaire" id="prix_unitaire" step="0.01"
-                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
+                <!-- Section Détails -->
+                <div class="border-b border-gray-200 pb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-6 flex items-center">
+                        <i class="fas fa-info-circle text-purple-600 mr-2"></i>
+                        Détails de l'Entrée
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <!-- Référence -->
+                        <div>
+                            <label for="reference" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-file-invoice text-purple-600 mr-1"></i>Référence
+                            </label>
+                            <input type="text" name="reference" id="reference"
+                                   class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                                   placeholder="Ex: FAC-2024-001">
+                            <p class="mt-1 text-xs text-gray-500">Numéro de facture ou bon de livraison</p>
+                        </div>
 
-                    <!-- Fournisseur -->
-                    <div>
-                        <label for="fournisseur" class="block text-sm font-medium text-gray-700">
-                            Fournisseur
-                        </label>
-                        <select name="fournisseur" id="fournisseur"
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Aucun fournisseur</option>
-                            {% for fournisseur in fournisseurs %}
-                                <option value="{{ fournisseur.id }}">
-                                    {{ fournisseur.nom }}
-                                </option>
-                            {% endfor %}
-                        </select>
+                        <!-- Fournisseur -->
+                        <div>
+                            <label for="fournisseur" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <i class="fas fa-truck text-orange-600 mr-1"></i>Fournisseur
+                            </label>
+                            <select name="fournisseur" id="fournisseur"
+                                    class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                                <option value="">Aucun fournisseur</option>
+                                {% for fournisseur in fournisseurs %}
+                                    <option value="{{ fournisseur.id }}">
+                                        {{ fournisseur.nom }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Commentaire -->
                 <div>
-                    <label for="commentaire" class="block text-sm font-medium text-gray-700">
-                        Commentaire
+                    <label for="commentaire" class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-comment text-gray-600 mr-1"></i>Commentaire
                     </label>
                     <textarea name="commentaire" id="commentaire" rows="3"
-                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                              placeholder="Informations supplémentaires..."></textarea>
+                              class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
+                              placeholder="Informations supplémentaires sur cette entrée..."></textarea>
                 </div>
 
-                <!-- Boutons -->
-                <div class="flex justify-end space-x-3">
+                <!-- Boutons d'action -->
+                <div class="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200">
                     <a href="{% url 'stocks:list' %}" 
-                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                       class="inline-flex justify-center items-center px-6 py-3 border-2 border-gray-300 rounded-xl text-base font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-all transform hover:scale-105">
+                        <i class="fas fa-times mr-2"></i>
                         Annuler
                     </a>
                     <button type="submit"
-                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                            class="inline-flex justify-center items-center px-8 py-3 border border-transparent rounded-xl text-base font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 shadow-lg transition-all transform hover:scale-105">
                         <i class="fas fa-arrow-up mr-2"></i>
                         Enregistrer l'entrée
                     </button>

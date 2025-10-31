@@ -1,0 +1,1777 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 12:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Dashboard"
+msgstr "Dashboard"
+
+msgid "Produits"
+msgstr "Products"
+
+msgid "Stock"
+msgstr "Stock"
+
+msgid "Ventes"
+msgstr "Sales"
+
+msgid "Fournisseurs"
+msgstr "Suppliers"
+
+msgid "Utilisateurs"
+msgstr "Users"
+
+msgid "Mon Profil"
+msgstr "My Profile"
+
+msgid "Déconnexion"
+msgstr "Logout"
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "Admin"
+msgstr "Admin"
+
+msgid "Lecture seule"
+msgstr "Read only"
+
+msgid "Gestion Quincaillerie"
+msgstr "Hardware Store Management"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Stock faible"
+msgstr "Low stock"
+
+msgid "restants"
+msgstr "remaining"
+
+msgid "Aucune notification"
+msgstr "No notifications"
+
+msgid "Gestion des Produits"
+msgstr "Product Management"
+
+msgid "Gestion des Ventes"
+msgstr "Sales Management"
+
+msgid "Gestion des Fournisseurs"
+msgstr "Supplier Management"
+
+msgid "Gestion des Utilisateurs"
+msgstr "User Management"
+
+msgid "Mouvements de Stock"
+msgstr "Stock Movements"
+
+msgid "Nouveau Produit"
+msgstr "New Product"
+
+msgid "Nouvelle Vente"
+msgstr "New Sale"
+
+msgid "Nouveau Fournisseur"
+msgstr "New Supplier"
+
+msgid "Nouvel Utilisateur"
+msgstr "New User"
+
+msgid "Nouvelle Catégorie"
+msgstr "New Category"
+
+msgid "Entrée Stock"
+msgstr "Stock Entry"
+
+msgid "Sortie Stock"
+msgstr "Stock Exit"
+
+msgid "Ajustement"
+msgstr "Adjustment"
+
+msgid "Total Produits"
+msgstr "Total Products"
+
+msgid "Catégories"
+msgstr "Categories"
+
+msgid "CA du mois"
+msgstr "Monthly Revenue"
+
+msgid "Alertes de Stock"
+msgstr "Stock Alerts"
+
+msgid "Ventes Récentes"
+msgstr "Recent Sales"
+
+msgid "Actions Rapides"
+msgstr "Quick Actions"
+
+msgid "Bienvenue"
+msgstr "Welcome"
+
+msgid "Retour à la liste"
+msgstr "Back to list"
+
+msgid "Modifier"
+msgstr "Edit"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Annuler"
+msgstr "Cancel"
+
+msgid "Créer"
+msgstr "Create"
+
+msgid "Mettre à jour"
+msgstr "Update"
+
+msgid "Filtrer"
+msgstr "Filter"
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Effacer"
+msgstr "Clear"
+
+msgid "Nom"
+msgstr "Name"
+
+msgid "Prix"
+msgstr "Price"
+
+msgid "Quantité"
+msgstr "Quantity"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Aucun résultat trouvé"
+msgstr "No results found"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Téléphone"
+msgstr "Phone"
+
+msgid "Rôle"
+msgstr "Role"
+
+msgid "Dernière connexion"
+msgstr "Last login"
+
+msgid "Produit"
+msgstr "Product"
+
+msgid "Réapprovisionner"
+msgstr "Restock"
+
+msgid "Terminée"
+msgstr "Completed"
+
+msgid "En cours"
+msgstr "In progress"
+
+msgid "Annulée"
+msgstr "Cancelled"
+
+msgid "Référence"
+msgstr "Reference"
+
+msgid "Commentaire"
+msgstr "Comment"
+
+msgid "Prix d'achat"
+msgstr "Purchase price"
+
+msgid "Prix de vente"
+msgstr "Selling price"
+
+msgid "Seuil d'alerte"
+msgstr "Alert threshold"
+
+msgid "Catégorie"
+msgstr "Category"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Code produit"
+msgstr "Product code"
+
+msgid "Unité"
+msgstr "Unit"
+
+msgid "Fournisseur principal"
+msgstr "Main supplier"
+
+msgid "Stock actuel"
+msgstr "Current stock"
+
+msgid "Valeur du stock"
+msgstr "Stock value"
+
+msgid "Marge bénéficiaire"
+msgstr "Profit margin"
+
+msgid "Mode de paiement"
+msgstr "Payment method"
+
+msgid "Montant final"
+msgstr "Final amount"
+
+msgid "Remise"
+msgstr "Discount"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Ville"
+msgstr "City"
+
+msgid "Pays"
+msgstr "Country"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Adresse"
+msgstr "Address"
+
+msgid "Code postal"
+msgstr "Postal code"
+
+msgid "Prénom"
+msgstr "First name"
+
+msgid "Nom de famille"
+msgstr "Last name"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Confirmer"
+msgstr "Confirm"
+
+msgid "Détails"
+msgstr "Details"
+
+msgid "Créer le premier"
+msgstr "Create the first"
+
+msgid "Liste"
+msgstr "List"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Informations générales"
+msgstr "General information"
+
+msgid "Informations de prix"
+msgstr "Price information"
+
+msgid "Gestion du stock"
+msgstr "Stock management"
+
+msgid "Récapitulatif financier"
+msgstr "Financial summary"
+
+msgid "Informations système"
+msgstr "System information"
+
+msgid "Date de création"
+msgstr "Creation date"
+
+msgid "Dernière modification"
+msgstr "Last modification"
+
+msgid "Articles vendus"
+msgstr "Items sold"
+
+msgid "Articles actuels"
+msgstr "Current items"
+
+msgid "Aucun article"
+msgstr "No items"
+
+msgid "Finaliser"
+msgstr "Finalize"
+
+msgid "Ajouter des articles"
+msgstr "Add items"
+
+msgid "Informations client"
+msgstr "Client information"
+
+msgid "Coordonnées"
+msgstr "Contact details"
+
+msgid "Informations commerciales"
+msgstr "Commercial information"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Identifiants de connexion"
+msgstr "Login credentials"
+
+msgid "Informations personnelles"
+msgstr "Personal information"
+
+msgid "Vous avez été déconnecté avec succès."
+msgstr "You have been successfully logged out."
+
+msgid "Utilisateur créé avec succès."
+msgstr "User created successfully."
+
+msgid "Utilisateur modifié avec succès."
+msgstr "User updated successfully."
+
+msgid "Utilisateur supprimé avec succès."
+msgstr "User deleted successfully."
+
+msgid "Profil mis à jour avec succès."
+msgstr "Profile updated successfully."
+
+msgid "Produit créé avec succès."
+msgstr "Product created successfully."
+
+msgid "Produit modifié avec succès."
+msgstr "Product updated successfully."
+
+msgid "Produit supprimé avec succès."
+msgstr "Product deleted successfully."
+
+msgid "Catégorie créée avec succès."
+msgstr "Category created successfully."
+
+msgid "Vente créée avec succès."
+msgstr "Sale created successfully."
+
+msgid "Vente modifiée avec succès."
+msgstr "Sale updated successfully."
+
+msgid "Vente supprimée avec succès."
+msgstr "Sale deleted successfully."
+
+msgid "Vente finalisée avec succès."
+msgstr "Sale finalized successfully."
+
+msgid "Mouvement de stock enregistré avec succès."
+msgstr "Stock movement recorded successfully."
+
+msgid "Fournisseur créé avec succès."
+msgstr "Supplier created successfully."
+
+msgid "Fournisseur modifié avec succès."
+msgstr "Supplier updated successfully."
+
+msgid "Fournisseur supprimé avec succès."
+msgstr "Supplier deleted successfully."
+
+msgid "Erreur lors de la création."
+msgstr "Error during creation."
+
+msgid "Erreur lors de la modification."
+msgstr "Error during update."
+
+msgid "Erreur lors de la suppression."
+msgstr "Error during deletion."
+
+msgid "Aucun produit trouvé"
+msgstr "No products found"
+
+msgid "Aucune vente trouvée"
+msgstr "No sales found"
+
+msgid "Aucun fournisseur trouvé"
+msgstr "No suppliers found"
+
+msgid "Aucun utilisateur trouvé"
+msgstr "No users found"
+
+msgid "Aucun mouvement trouvé"
+msgstr "No movements found"
+
+msgid "Aucune catégorie trouvée"
+msgstr "No categories found"
+
+msgid "Aucune alerte de stock."
+msgstr "No stock alerts."
+
+msgid "Aucune vente récente"
+msgstr "No recent sales"
+
+msgid "Commencez par créer votre premier"
+msgstr "Start by creating your first"
+
+msgid "Créer le premier"
+msgstr "Create the first"
+
+msgid "Enregistrer l'entrée"
+msgstr "Record entry"
+
+msgid "Enregistrer la sortie"
+msgstr "Record exit"
+
+msgid "Enregistrer l'ajustement"
+msgstr "Record adjustment"
+
+msgid "Enregistrer le mouvement"
+msgstr "Record movement"
+
+msgid "Prix Unitaire"
+msgstr "Unit Price"
+
+msgid "Type de mouvement"
+msgstr "Movement type"
+
+msgid "Motif"
+msgstr "Reason"
+
+msgid "Client"
+msgstr "Client"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Localisation"
+msgstr "Location"
+
+msgid "Nom du client"
+msgstr "Client name"
+
+msgid "Téléphone du client"
+msgstr "Client phone"
+
+msgid "Email du client"
+msgstr "Client email"
+
+msgid "Conditions de paiement"
+msgstr "Payment terms"
+
+msgid "Délai de livraison"
+msgstr "Delivery time"
+
+msgid "jours"
+msgstr "days"
+
+msgid "Numéro TVA"
+msgstr "VAT number"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+msgid "Laisser vide pour ne pas modifier"
+msgstr "Leave empty to keep unchanged"
+
+msgid "Détermine les permissions d'accès dans l'application"
+msgstr "Determines access permissions in the application"
+
+msgid "Nom du produit"
+msgstr "Product name"
+
+msgid "Nom du fournisseur"
+msgstr "Supplier name"
+
+msgid "Nom du contact"
+msgstr "Contact name"
+
+msgid "Contact principal"
+msgstr "Main contact"
+
+msgid "Quantité d'ajustement"
+msgstr "Adjustment quantity"
+
+msgid "Raison de l'ajustement"
+msgstr "Adjustment reason"
+
+msgid "Positif pour augmenter"
+msgstr "Positive to increase"
+
+msgid "Négatif pour diminuer"
+msgstr "Negative to decrease"
+
+msgid "Rupture"
+msgstr "Out of stock"
+
+msgid "Disponible"
+msgstr "Available"
+
+msgid "Informations principales"
+msgstr "Main information"
+
+msgid "Détails supplémentaires"
+msgstr "Additional details"
+
+msgid "Détails de l'entrée"
+msgstr "Entry details"
+
+msgid "Détails de la sortie"
+msgstr "Exit details"
+
+msgid "Détails de l'ajustement"
+msgstr "Adjustment details"
+
+msgid "Informations produit"
+msgstr "Product information"
+
+msgid "Paiement et statut"
+msgstr "Payment and status"
+
+msgid "Montant Total HT"
+msgstr "Total amount ex. VAT"
+
+msgid "Montant Final"
+msgstr "Final amount"
+
+msgid "Prix Unitaire"
+msgstr "Unit Price"
+
+msgid "Montant"
+msgstr "Amount"
+
+msgid "Numéro de facture ou bon de livraison"
+msgstr "Invoice number or delivery note"
+
+msgid "Raison de l'ajustement (inventaire physique, erreur de saisie, etc.)"
+msgstr "Adjustment reason (physical inventory, input error, etc.)"
+
+msgid "Raison de l'ajustement"
+msgstr "Adjustment reason"
+
+msgid "Numéro d'inventaire..."
+msgstr "Inventory number..."
+
+msgid "Utilisez des valeurs positives pour augmenter le stock ou des valeurs négatives pour le diminuer."
+msgstr "Use positive values to increase stock or negative values to decrease it."
+
+msgid "Note importante"
+msgstr "Important note"
+
+msgid "Un ajustement permet de corriger l'inventaire physique."
+msgstr "An adjustment allows to correct physical inventory."
+
+msgid "Quantité minimale avant alerte de rupture de stock"
+msgstr "Minimum quantity before out of stock alert"
+
+msgid "Organisez vos produits par catégories pour une meilleure gestion"
+msgstr "Organize your products by categories for better management"
+
+msgid "Gérez votre catalogue de produits efficacement"
+msgstr "Manage your product catalog efficiently"
+
+msgid "Suivez tous les mouvements de votre stock en temps réel"
+msgstr "Track all your stock movements in real time"
+
+msgid "Gérez vos partenaires fournisseurs"
+msgstr "Manage your supplier partners"
+
+msgid "Gérez les accès et les rôles de votre équipe"
+msgstr "Manage access and roles of your team"
+
+msgid "Suivez et gérez toutes vos ventes"
+msgstr "Track and manage all your sales"
+
+msgid "Gérez votre catalogue avec codes, prix, catégories et images"
+msgstr "Manage your catalog with codes, prices, categories and images"
+
+msgid "Suivez vos entrées, sorties et alertes de rupture de stock"
+msgstr "Track your entries, exits and out of stock alerts"
+
+msgid "Enregistrez vos ventes avec gestion client et facturation"
+msgstr "Record your sales with client management and invoicing"
+
+msgid "Gérez vos contacts fournisseurs et commandes"
+msgstr "Manage your supplier contacts and orders"
+
+msgid "Interface intuitive pour des opérations rapides"
+msgstr "Intuitive interface for quick operations"
+
+msgid "Vos données sont protégées et sauvegardées"
+msgstr "Your data is protected and backed up"
+
+msgid "Tableaux de bord et statistiques en temps réel"
+msgstr "Dashboards and real-time statistics"
+
+msgid "Simple, rapide et efficace"
+msgstr "Simple, fast and efficient"
+
+msgid "Prêt à démarrer ?"
+msgstr "Ready to start?"
+
+msgid "Connectez-vous maintenant et découvrez tous les avantages de notre plateforme"
+msgstr "Log in now and discover all the benefits of our platform"
+
+msgid "Se connecter maintenant"
+msgstr "Log in now"
+
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Accédez à votre espace de gestion"
+msgstr "Access your management space"
+
+msgid "Compte de démonstration"
+msgstr "Demo account"
+
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+msgid "Liens rapides"
+msgstr "Quick links"
+
+msgid "À propos"
+msgstr "About"
+
+msgid "Fonctionnalités"
+msgstr "Features"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Une solution complète pour gérer vos produits, stocks, ventes et fournisseurs."
+msgstr "A complete solution to manage your products, stock, sales and suppliers."
+
+msgid "Automatisez vos tâches quotidiennes et optimisez votre activité."
+msgstr "Automate your daily tasks and optimize your activity."
+
+msgid "Fonctionnalités principales"
+msgstr "Main features"
+
+msgid "Tout ce dont vous avez besoin pour gérer efficacement votre quincaillerie"
+msgstr "Everything you need to efficiently manage your hardware store"
+
+msgid "Pourquoi choisir notre solution ?"
+msgstr "Why choose our solution?"
+
+msgid "Rapide"
+msgstr "Fast"
+
+msgid "Sécurisé"
+msgstr "Secure"
+
+msgid "Performant"
+msgstr "Performant"
+
+msgid "Gérez votre quincaillerie en toute simplicité"
+msgstr "Manage your hardware store with ease"
+
+msgid "Solution complète de gestion pour votre quincaillerie."
+msgstr "Complete management solution for your hardware store."
+
+msgid "Gérez vos produits, stocks, ventes et fournisseurs en toute simplicité."
+msgstr "Manage your products, stock, sales and suppliers with ease."
+
+msgid "Tous droits réservés"
+msgstr "All rights reserved"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Connexion"
+msgstr "Login"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Entrez votre nom d'utilisateur"
+msgstr "Enter your username"
+
+msgid "Entrez votre mot de passe"
+msgstr "Enter your password"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Voir produits"
+msgstr "View products"
+
+msgid "Créez un nouveau produit à votre catalogue"
+msgstr "Add a new product to your catalog"
+
+msgid "Modifiez les informations du produit"
+msgstr "Edit product information"
+
+msgid "Ajoutez un nouveau fournisseur"
+msgstr "Add a new supplier"
+
+msgid "Modifiez les informations du fournisseur"
+msgstr "Edit supplier information"
+
+msgid "Créez un nouveau compte utilisateur"
+msgstr "Create a new user account"
+
+msgid "Modifiez les informations de l'utilisateur"
+msgstr "Edit user information"
+
+msgid "Enregistrez une nouvelle entrée de stock"
+msgstr "Record a new stock entry"
+
+msgid "Enregistrez une sortie de stock"
+msgstr "Record a stock exit"
+
+msgid "Corrigez l'inventaire physique de votre stock"
+msgstr "Correct the physical inventory of your stock"
+
+msgid "Créez une nouvelle vente"
+msgstr "Create a new sale"
+
+msgid "Modifiez les informations de la vente"
+msgstr "Edit sale information"
+
+msgid "Bienvenue"
+msgstr "Welcome"
+
+msgid "Commencez par créer votre première catégorie pour organiser vos produits"
+msgstr "Start by creating your first category to organize your products"
+
+msgid "Créez la première catégorie"
+msgstr "Create the first category"
+
+msgid "Créer le premier produit"
+msgstr "Create the first product"
+
+msgid "Créer le premier fournisseur"
+msgstr "Create the first supplier"
+
+msgid "Créer le premier utilisateur"
+msgstr "Create the first user"
+
+msgid "Enregistrer une entrée"
+msgstr "Record an entry"
+
+msgid "Organisez vos produits par catégories"
+msgstr "Organize your products by categories"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "sur"
+msgstr "of"
+
+msgid "Précédent"
+msgstr "Previous"
+
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Jamais connecté"
+msgstr "Never logged in"
+
+msgid "Jamais"
+msgstr "Never"
+
+msgid "Valeur du Stock"
+msgstr "Stock Value"
+
+msgid "Montant Total HT"
+msgstr "Total Amount Ex. VAT"
+
+msgid "Récapitulatif Financier"
+msgstr "Financial Summary"
+
+msgid "Articles Vendus"
+msgstr "Items Sold"
+
+msgid "Détails"
+msgstr "Details"
+
+msgid "Numéro de vente"
+msgstr "Sale number"
+
+msgid "N° Vente"
+msgstr "Sale #"
+
+msgid "Informations Client"
+msgstr "Client Information"
+
+msgid "Date de création"
+msgstr "Creation Date"
+
+msgid "Dernière modification"
+msgstr "Last Modification"
+
+msgid "Informations Système"
+msgstr "System Information"
+
+msgid "Informations Stock"
+msgstr "Stock Information"
+
+msgid "Seuil d'Alerte"
+msgstr "Alert Threshold"
+
+msgid "Informations Générales"
+msgstr "General Information"
+
+msgid "Personnalisation"
+msgstr "Customization"
+
+msgid "Couleur de la catégorie"
+msgstr "Category color"
+
+msgid "Aperçu en temps réel"
+msgstr "Real-time preview"
+
+msgid "Petit aperçu"
+msgstr "Small preview"
+
+msgid "Grand aperçu"
+msgstr "Large preview"
+
+msgid "Créer la catégorie"
+msgstr "Create category"
+
+msgid "Aucune description"
+msgstr "No description"
+
+msgid "Commencez par créer votre première catégorie"
+msgstr "Start by creating your first category"
+
+msgid "Gestion des Catégories"
+msgstr "Category Management"
+
+msgid "produit(s)"
+msgstr "product(s)"
+
+msgid "Type de Mouvement"
+msgstr "Movement Type"
+
+msgid "Quantité d'Ajustement"
+msgstr "Adjustment Quantity"
+
+msgid "Référence (Numéro d'inventaire...)"
+msgstr "Reference (Inventory number...)"
+
+msgid "Informations Supplémentaires"
+msgstr "Additional Information"
+
+msgid "Détails Supplémentaires"
+msgstr "Additional Details"
+
+msgid "Raison de l'ajustement"
+msgstr "Adjustment Reason"
+
+msgid "Renseignez les informations suivantes pour créer une catégorie"
+msgstr "Fill in the following information to create a category"
+
+msgid "Informations de base"
+msgstr "Basic Information"
+
+msgid "Choisissez une couleur pour identifier visuellement cette catégorie"
+msgstr "Choose a color to visually identify this category"
+
+msgid "Vous pouvez également saisir directement un code couleur hexadécimal"
+msgstr "You can also enter a hexadecimal color code directly"
+
+msgid "Choisir une couleur"
+msgstr "Choose a color"
+
+msgid "Code hexadécimal"
+msgstr "Hexadecimal code"
+
+msgid "Les catégories permettent d'organiser vos produits"
+msgstr "Categories allow you to organize your products"
+
+msgid "Créer une nouvelle catégorie"
+msgstr "Create a new category"
+
+msgid "Voir la liste des catégories"
+msgstr "View category list"
+
+msgid "Vous pouvez personnaliser l'apparence de votre catégorie en choisissant une couleur"
+msgstr "You can customize the appearance of your category by choosing a color"
+
+msgid "L'aperçu ci-dessous se met à jour en temps réel"
+msgstr "The preview below updates in real time"
+
+msgid "Utilisez le sélecteur de couleur ou saisissez directement un code hexadécimal"
+msgstr "Use the color picker or enter a hexadecimal code directly"
+
+msgid "Ex: Rouge vif"
+msgstr "Ex: Bright red"
+
+msgid "Ex: #FF5733"
+msgstr "Ex: #FF5733"
+
+msgid "Modifiez les informations de la vente"
+msgstr "Edit sale information"
+
+msgid "Créez une nouvelle vente"
+msgstr "Create a new sale"
+
+msgid "Enregistrez une sortie de stock"
+msgstr "Record a stock exit"
+
+msgid "Enregistrez une nouvelle entrée de stock"
+msgstr "Record a new stock entry"
+
+msgid "Corrigez l'inventaire physique de votre stock"
+msgstr "Correct the physical inventory of your stock"
+
+msgid "Modifiez les informations du produit"
+msgstr "Edit product information"
+
+msgid "Ajoutez un nouveau produit à votre catalogue"
+msgstr "Add a new product to your catalog"
+
+msgid "Ajoutez un nouveau fournisseur"
+msgstr "Add a new supplier"
+
+msgid "Modifiez les informations du fournisseur"
+msgstr "Edit supplier information"
+
+msgid "Créez un nouveau compte utilisateur"
+msgstr "Create a new user account"
+
+msgid "Modifiez les informations de l'utilisateur"
+msgstr "Edit user information"
+
+msgid "Détails Produit"
+msgstr "Product Details"
+
+msgid "Entrée de Stock"
+msgstr "Stock Entry"
+
+msgid "Sortie de Stock"
+msgstr "Stock Exit"
+
+msgid "Ajustement de Stock"
+msgstr "Stock Adjustment"
+
+msgid "Nouveau Mouvement de Stock"
+msgstr "New Stock Movement"
+
+msgid "Détails Vente"
+msgstr "Sale Details"
+
+msgid "Nouvelle Vente"
+msgstr "New Sale"
+
+msgid "Modifier la Vente"
+msgstr "Edit Sale"
+
+msgid "Détails Fournisseur"
+msgstr "Supplier Details"
+
+msgid "Nouveau Fournisseur"
+msgstr "New Supplier"
+
+msgid "Modifier le Fournisseur"
+msgstr "Edit Supplier"
+
+msgid "Nouvel Utilisateur"
+msgstr "New User"
+
+msgid "Modifier l'Utilisateur"
+msgstr "Edit User"
+
+msgid "Détails Utilisateur"
+msgstr "User Details"
+
+msgid "Mon Profil"
+msgstr "My Profile"
+
+msgid "Modifier le Profil"
+msgstr "Edit Profile"
+
+msgid "Retour aux mouvements"
+msgstr "Back to movements"
+
+msgid "Retour à la liste"
+msgstr "Back to list"
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Informations Produit"
+msgstr "Product Information"
+
+msgid "Détails de l'Entrée"
+msgstr "Entry Details"
+
+msgid "Détails de la Sortie"
+msgstr "Exit Details"
+
+msgid "Détails de l'Ajustement"
+msgstr "Adjustment Details"
+
+msgid "Informations Principales"
+msgstr "Main Information"
+
+msgid "Informations Commerciales"
+msgstr "Commercial Information"
+
+msgid "Paiement et Statut"
+msgstr "Payment and Status"
+
+msgid "Informations Client"
+msgstr "Client Information"
+
+msgid "Coordonnées"
+msgstr "Contact Details"
+
+msgid "Identifiants de Connexion"
+msgstr "Login Credentials"
+
+msgid "Informations Personnelles"
+msgstr "Personal Information"
+
+msgid "Contact Principal"
+msgstr "Main Contact"
+
+msgid "Numéro TVA"
+msgstr "VAT Number"
+
+msgid "Délai de Livraison (jours)"
+msgstr "Delivery Time (days)"
+
+msgid "Conditions de Paiement"
+msgstr "Payment Terms"
+
+msgid "Nom du Fournisseur"
+msgstr "Supplier Name"
+
+msgid "Unité de mesure"
+msgstr "Unit of measurement"
+
+msgid "Sélectionner une catégorie"
+msgstr "Select a category"
+
+msgid "Créer une nouvelle catégorie"
+msgstr "Create a new category"
+
+msgid "Sélectionner un produit"
+msgstr "Select a product"
+
+msgid "Sélectionner un motif"
+msgstr "Select a reason"
+
+msgid "Sélectionner un fournisseur"
+msgstr "Select a supplier"
+
+msgid "Aucun fournisseur"
+msgstr "No supplier"
+
+msgid "Aucun client"
+msgstr "No client"
+
+msgid "Sélectionner un rôle"
+msgstr "Select a role"
+
+msgid "Utilisez au moins 8 caractères avec des lettres et des chiffres"
+msgstr "Use at least 8 characters with letters and numbers"
+
+msgid "Laisser vide pour conserver le mot de passe actuel"
+msgstr "Leave empty to keep current password"
+
+msgid "Mot de passe sécurisé"
+msgstr "Secure password"
+
+msgid "Informations supplémentaires sur cette entrée..."
+msgstr "Additional information about this entry..."
+
+msgid "Informations supplémentaires sur cette sortie..."
+msgstr "Additional information about this exit..."
+
+msgid "Informations supplémentaires..."
+msgstr "Additional information..."
+
+msgid "Informations supplémentaires sur ce fournisseur..."
+msgstr "Additional information about this supplier..."
+
+msgid "Adresse complète..."
+msgstr "Full address..."
+
+msgid "Notes sur la vente..."
+msgstr "Notes on the sale..."
+
+msgid "Renseignez les informations suivantes pour créer une catégorie"
+msgstr "Fill in the following information to create a category"
+
+msgid "Choisissez une couleur pour identifier visuellement cette catégorie"
+msgstr "Choose a color to visually identify this category"
+
+msgid "Vous pouvez également saisir directement un code couleur hexadécimal"
+msgstr "You can also enter a hexadecimal color code directly"
+
+msgid "Les catégories permettent d'organiser vos produits"
+msgstr "Categories allow you to organize your products"
+
+msgid "Vous pouvez personnaliser l'apparence de votre catégorie en choisissant une couleur"
+msgstr "You can customize the appearance of your category by choosing a color"
+
+msgid "L'aperçu ci-dessous se met à jour en temps réel"
+msgstr "The preview below updates in real time"
+
+msgid "Utilisez le sélecteur de couleur ou saisissez directement un code hexadécimal"
+msgstr "Use the color picker or enter a hexadecimal code directly"
+
+msgid "Choisir une couleur"
+msgstr "Choose a color"
+
+msgid "Code hexadécimal"
+msgstr "Hexadecimal code"
+
+msgid "Ex: Rouge vif"
+msgstr "Ex: Bright red"
+
+msgid "Ex: #FF5733"
+msgstr "Ex: #FF5733"
+
+msgid "Personnalisation"
+msgstr "Customization"
+
+msgid "Couleur de la catégorie"
+msgstr "Category color"
+
+msgid "Aperçu en temps réel"
+msgstr "Real-time preview"
+
+msgid "Petit aperçu"
+msgstr "Small preview"
+
+msgid "Grand aperçu"
+msgstr "Large preview"
+
+msgid "Créer la catégorie"
+msgstr "Create category"
+
+msgid "Informations de base"
+msgstr "Basic Information"
+
+msgid "Aucune description"
+msgstr "No description"
+
+msgid "produit(s)"
+msgstr "product(s)"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Gestion des Catégories"
+msgstr "Category Management"
+
+msgid "Commencez par créer votre première catégorie pour organiser vos produits"
+msgstr "Start by creating your first category to organize your products"
+
+msgid "Créer la première catégorie"
+msgstr "Create the first category"
+
+msgid "Aucune catégorie"
+msgstr "No category"
+
+msgid "Commencez par créer votre première catégorie"
+msgstr "Start by creating your first category"
+
+msgid "Organisez vos produits par catégories pour une meilleure gestion"
+msgstr "Organize your products by categories for better management"
+
+msgid "Retour aux Produits"
+msgstr "Back to Products"
+
+msgid "Voir catégories"
+msgstr "View categories"
+
+msgid "Gérez votre catalogue avec codes, prix, catégories et images"
+msgstr "Manage your catalog with codes, prices, categories and images"
+
+msgid "Suivez vos entrées, sorties et alertes de rupture de stock"
+msgstr "Track your entries, exits and out of stock alerts"
+
+msgid "Enregistrez vos ventes avec gestion client et facturation"
+msgstr "Record your sales with client management and invoicing"
+
+msgid "Gérez vos contacts fournisseurs et commandes"
+msgstr "Manage your supplier contacts and orders"
+
+msgid "Rapide"
+msgstr "Fast"
+
+msgid "Sécurisé"
+msgstr "Secure"
+
+msgid "Performant"
+msgstr "Performant"
+
+msgid "Interface intuitive pour des opérations rapides"
+msgstr "Intuitive interface for quick operations"
+
+msgid "Vos données sont protégées et sauvegardées"
+msgstr "Your data is protected and backed up"
+
+msgid "Tableaux de bord et statistiques en temps réel"
+msgstr "Dashboards and real-time statistics"
+
+msgid "Simple, rapide et efficace"
+msgstr "Simple, fast and efficient"
+
+msgid "Prêt à démarrer ?"
+msgstr "Ready to start?"
+
+msgid "Connectez-vous maintenant et découvrez tous les avantages de notre plateforme"
+msgstr "Log in now and discover all the benefits of our platform"
+
+msgid "Se connecter maintenant"
+msgstr "Log in now"
+
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Gérez votre quincaillerie en toute simplicité"
+msgstr "Manage your hardware store with ease"
+
+msgid "Une solution complète pour gérer vos produits, stocks, ventes et fournisseurs."
+msgstr "A complete solution to manage your products, stock, sales and suppliers."
+
+msgid "Automatisez vos tâches quotidiennes et optimisez votre activité."
+msgstr "Automate your daily tasks and optimize your activity."
+
+msgid "Fonctionnalités principales"
+msgstr "Main features"
+
+msgid "Tout ce dont vous avez besoin pour gérer efficacement votre quincaillerie"
+msgstr "Everything you need to efficiently manage your hardware store"
+
+msgid "Pourquoi choisir notre solution ?"
+msgstr "Why choose our solution?"
+
+msgid "Rapide"
+msgstr "Fast"
+
+msgid "Sécurisé"
+msgstr "Secure"
+
+msgid "Performant"
+msgstr "Performant"
+
+msgid "Interface intuitive pour des opérations rapides"
+msgstr "Intuitive interface for quick operations"
+
+msgid "Vos données sont protégées et sauvegardées"
+msgstr "Your data is protected and backed up"
+
+msgid "Tableaux de bord et statistiques en temps réel"
+msgstr "Dashboards and real-time statistics"
+
+msgid "Simple, rapide et efficace"
+msgstr "Simple, fast and efficient"
+
+msgid "Prêt à démarrer ?"
+msgstr "Ready to start?"
+
+msgid "Connectez-vous maintenant et découvrez tous les avantages de notre plateforme"
+msgstr "Log in now and discover all the benefits of our platform"
+
+msgid "Se connecter maintenant"
+msgstr "Log in now"
+
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Accédez à votre espace de gestion"
+msgstr "Access your management space"
+
+msgid "Compte de démonstration"
+msgstr "Demo account"
+
+msgid "Utilisateur :"
+msgstr "User:"
+
+msgid "Mot de passe :"
+msgstr "Password:"
+
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+msgid "Liens rapides"
+msgstr "Quick links"
+
+msgid "À propos"
+msgstr "About"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Solution complète de gestion pour votre quincaillerie."
+msgstr "Complete management solution for your hardware store."
+
+msgid "Gérez vos produits, stocks, ventes et fournisseurs en toute simplicité."
+msgstr "Manage your products, stock, sales and suppliers with ease."
+
+msgid "Connexion"
+msgstr "Login"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Entrez votre nom d'utilisateur"
+msgstr "Enter your username"
+
+msgid "Entrez votre mot de passe"
+msgstr "Enter your password"
+
+msgid "Tous droits réservés"
+msgstr "All rights reserved"
+
+msgid "Voir produits"
+msgstr "View products"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "contact@quincaillerie-pro.com"
+msgstr "contact@hardware-store-pro.com"
+
+msgid "+33 1 23 45 67 89"
+msgstr "+33 1 23 45 67 89"
+
+msgid "123 Rue de la Quincaillerie"
+msgstr "123 Hardware Street"
+
+msgid "75001 Paris, France"
+msgstr "75001 Paris, France"
+
+msgid "Voir la liste des catégories"
+msgstr "View category list"
+
+msgid "Retour aux Produits"
+msgstr "Back to Products"
+
+msgid "produit(s)"
+msgstr "product(s)"
+
+msgid "Aucune description"
+msgstr "No description"
+
+msgid "Aucune catégorie trouvée"
+msgstr "No category found"
+
+msgid "Voir produits"
+msgstr "View products"
+
+msgid "Retour aux mouvements"
+msgstr "Back to movements"
+
+msgid "Retour à la liste"
+msgstr "Back to list"
+
+msgid "Informations Produit"
+msgstr "Product Information"
+
+msgid "Détails de l'Entrée"
+msgstr "Entry Details"
+
+msgid "Détails de la Sortie"
+msgstr "Exit Details"
+
+msgid "Détails de l'Ajustement"
+msgstr "Adjustment Details"
+
+msgid "Informations Principales"
+msgstr "Main Information"
+
+msgid "Informations Commerciales"
+msgstr "Commercial Information"
+
+msgid "Paiement et Statut"
+msgstr "Payment and Status"
+
+msgid "Informations Client"
+msgstr "Client Information"
+
+msgid "Coordonnées"
+msgstr "Contact Details"
+
+msgid "Identifiants de Connexion"
+msgstr "Login Credentials"
+
+msgid "Informations Personnelles"
+msgstr "Personal Information"
+
+msgid "Contact Principal"
+msgstr "Main Contact"
+
+msgid "Numéro TVA"
+msgstr "VAT Number"
+
+msgid "Délai de Livraison (jours)"
+msgstr "Delivery Time (days)"
+
+msgid "Conditions de Paiement"
+msgstr "Payment Terms"
+
+msgid "Nom du Fournisseur"
+msgstr "Supplier Name"
+
+msgid "Unité de mesure"
+msgstr "Unit of measurement"
+
+msgid "Sélectionner une catégorie"
+msgstr "Select a category"
+
+msgid "Créer une nouvelle catégorie"
+msgstr "Create a new category"
+
+msgid "Sélectionner un produit"
+msgstr "Select a product"
+
+msgid "Sélectionner un motif"
+msgstr "Select a reason"
+
+msgid "Sélectionner un fournisseur"
+msgstr "Select a supplier"
+
+msgid "Aucun fournisseur"
+msgstr "No supplier"
+
+msgid "Aucun client"
+msgstr "No client"
+
+msgid "Sélectionner un rôle"
+msgstr "Select a role"
+
+msgid "Utilisez au moins 8 caractères avec des lettres et des chiffres"
+msgstr "Use at least 8 characters with letters and numbers"
+
+msgid "Laisser vide pour conserver le mot de passe actuel"
+msgstr "Leave empty to keep current password"
+
+msgid "Mot de passe sécurisé"
+msgstr "Secure password"
+
+msgid "Informations supplémentaires sur cette entrée..."
+msgstr "Additional information about this entry..."
+
+msgid "Informations supplémentaires sur cette sortie..."
+msgstr "Additional information about this exit..."
+
+msgid "Informations supplémentaires..."
+msgstr "Additional information..."
+
+msgid "Informations supplémentaires sur ce fournisseur..."
+msgstr "Additional information about this supplier..."
+
+msgid "Adresse complète..."
+msgstr "Full address..."
+
+msgid "Notes sur la vente..."
+msgstr "Notes on the sale..."
+
+msgid "Renseignez les informations suivantes pour créer une catégorie"
+msgstr "Fill in the following information to create a category"
+
+msgid "Choisissez une couleur pour identifier visuellement cette catégorie"
+msgstr "Choose a color to visually identify this category"
+
+msgid "Vous pouvez également saisir directement un code couleur hexadécimal"
+msgstr "You can also enter a hexadecimal color code directly"
+
+msgid "Les catégories permettent d'organiser vos produits"
+msgstr "Categories allow you to organize your products"
+
+msgid "Vous pouvez personnaliser l'apparence de votre catégorie en choisissant une couleur"
+msgstr "You can customize the appearance of your category by choosing a color"
+
+msgid "L'aperçu ci-dessous se met à jour en temps réel"
+msgstr "The preview below updates in real time"
+
+msgid "Utilisez le sélecteur de couleur ou saisissez directement un code hexadécimal"
+msgstr "Use the color picker or enter a hexadecimal code directly"
+
+msgid "Choisir une couleur"
+msgstr "Choose a color"
+
+msgid "Code hexadécimal"
+msgstr "Hexadecimal code"
+
+msgid "Ex: Rouge vif"
+msgstr "Ex: Bright red"
+
+msgid "Ex: #FF5733"
+msgstr "Ex: #FF5733"
+
+msgid "Personnalisation"
+msgstr "Customization"
+
+msgid "Couleur de la catégorie"
+msgstr "Category color"
+
+msgid "Aperçu en temps réel"
+msgstr "Real-time preview"
+
+msgid "Petit aperçu"
+msgstr "Small preview"
+
+msgid "Grand aperçu"
+msgstr "Large preview"
+
+msgid "Créer la catégorie"
+msgstr "Create category"
+
+msgid "Informations de base"
+msgstr "Basic Information"
+
+msgid "Aucune description"
+msgstr "No description"
+
+msgid "produit(s)"
+msgstr "product(s)"
+
+msgid "Voir"
+msgstr "View"
+
+msgid "Gestion des Catégories"
+msgstr "Category Management"
+
+msgid "Commencez par créer votre première catégorie pour organiser vos produits"
+msgstr "Start by creating your first category to organize your products"
+
+msgid "Créer la première catégorie"
+msgstr "Create the first category"
+
+msgid "Aucune catégorie"
+msgstr "No category"
+
+msgid "Commencez par créer votre première catégorie"
+msgstr "Start by creating your first category"
+
+msgid "Organisez vos produits par catégories pour une meilleure gestion"
+msgstr "Organize your products by categories for better management"
+
+msgid "Retour aux Produits"
+msgstr "Back to Products"
+
+msgid "Voir catégories"
+msgstr "View categories"
+
+msgid "Gérez votre catalogue avec codes, prix, catégories et images"
+msgstr "Manage your catalog with codes, prices, categories and images"
+
+msgid "Suivez vos entrées, sorties et alertes de rupture de stock"
+msgstr "Track your entries, exits and out of stock alerts"
+
+msgid "Enregistrez vos ventes avec gestion client et facturation"
+msgstr "Record your sales with client management and invoicing"
+
+msgid "Gérez vos contacts fournisseurs et commandes"
+msgstr "Manage your supplier contacts and orders"
+
+msgid "Rapide"
+msgstr "Fast"
+
+msgid "Sécurisé"
+msgstr "Secure"
+
+msgid "Performant"
+msgstr "Performant"
+
+msgid "Interface intuitive pour des opérations rapides"
+msgstr "Intuitive interface for quick operations"
+
+msgid "Vos données sont protégées et sauvegardées"
+msgstr "Your data is protected and backed up"
+
+msgid "Tableaux de bord et statistiques en temps réel"
+msgstr "Dashboards and real-time statistics"
+
+msgid "Simple, rapide et efficace"
+msgstr "Simple, fast and efficient"
+
+msgid "Prêt à démarrer ?"
+msgstr "Ready to start?"
+
+msgid "Connectez-vous maintenant et découvrez tous les avantages de notre plateforme"
+msgstr "Log in now and discover all the benefits of our platform"
+
+msgid "Se connecter maintenant"
+msgstr "Log in now"
+
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Gérez votre quincaillerie en toute simplicité"
+msgstr "Manage your hardware store with ease"
+
+msgid "Une solution complète pour gérer vos produits, stocks, ventes et fournisseurs."
+msgstr "A complete solution to manage your products, stock, sales and suppliers."
+
+msgid "Automatisez vos tâches quotidiennes et optimisez votre activité."
+msgstr "Automate your daily tasks and optimize your activity."
+
+msgid "Fonctionnalités principales"
+msgstr "Main features"
+
+msgid "Tout ce dont vous avez besoin pour gérer efficacement votre quincaillerie"
+msgstr "Everything you need to efficiently manage your hardware store"
+
+msgid "Pourquoi choisir notre solution ?"
+msgstr "Why choose our solution?"
+
+msgid "Rapide"
+msgstr "Fast"
+
+msgid "Sécurisé"
+msgstr "Secure"
+
+msgid "Performant"
+msgstr "Performant"
+
+msgid "Interface intuitive pour des opérations rapides"
+msgstr "Intuitive interface for quick operations"
+
+msgid "Vos données sont protégées et sauvegardées"
+msgstr "Your data is protected and backed up"
+
+msgid "Tableaux de bord et statistiques en temps réel"
+msgstr "Dashboards and real-time statistics"
+
+msgid "Simple, rapide et efficace"
+msgstr "Simple, fast and efficient"
+
+msgid "Prêt à démarrer ?"
+msgstr "Ready to start?"
+
+msgid "Connectez-vous maintenant et découvrez tous les avantages de notre plateforme"
+msgstr "Log in now and discover all the benefits of our platform"
+
+msgid "Se connecter maintenant"
+msgstr "Log in now"
+
+msgid "Commencer maintenant"
+msgstr "Start now"
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Accédez à votre espace de gestion"
+msgstr "Access your management space"
+
+msgid "Compte de démonstration"
+msgstr "Demo account"
+
+msgid "Utilisateur :"
+msgstr "User:"
+
+msgid "Mot de passe :"
+msgstr "Password:"
+
+msgid "Tous droits réservés."
+msgstr "All rights reserved."
+
+msgid "Liens rapides"
+msgstr "Quick links"
+
+msgid "À propos"
+msgstr "About"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Documentation"
+msgstr "Documentation"
+
+msgid "Solution complète de gestion pour votre quincaillerie."
+msgstr "Complete management solution for your hardware store."
+
+msgid "Gérez vos produits, stocks, ventes et fournisseurs en toute simplicité."
+msgstr "Manage your products, stock, sales and suppliers with ease."
+
+msgid "Connexion"
+msgstr "Login"
+
+msgid "Se connecter"
+msgstr "Log in"
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Entrez votre nom d'utilisateur"
+msgstr "Enter your username"
+
+msgid "Entrez votre mot de passe"
+msgstr "Enter your password"
+
+msgid "Tous droits réservés"
+msgstr "All rights reserved"
+
+msgid "Voir produits"
+msgstr "View products"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "contact@quincaillerie-pro.com"
+msgstr "contact@hardware-store-pro.com"
+
+msgid "+33 1 23 45 67 89"
+msgstr "+33 1 23 45 67 89"
+
+msgid "123 Rue de la Quincaillerie"
+msgstr "123 Hardware Street"
+
+msgid "75001 Paris, France"
+msgstr "75001 Paris, France"
+

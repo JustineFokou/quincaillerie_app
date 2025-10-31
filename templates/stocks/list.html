@@ -4,46 +4,58 @@
 
 {% block content %}
 <div class="space-y-6">
-    <!-- Header -->
-    <div class="md:flex md:items-center md:justify-between">
-        <div class="min-w-0 flex-1">
-            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-                <i class="fas fa-warehouse mr-2"></i>
-                Mouvements de Stock
-            </h2>
-        </div>
-        <div class="mt-4 flex md:ml-4 md:mt-0 space-x-3">
-            <a href="{% url 'stocks:entree' %}" 
-               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                <i class="fas fa-arrow-up mr-2"></i>
-                Entrée Stock
-            </a>
-            <a href="{% url 'stocks:sortie' %}" 
-               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                <i class="fas fa-arrow-down mr-2"></i>
-                Sortie Stock
-            </a>
-            <a href="{% url 'stocks:create' %}" 
-               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                <i class="fas fa-plus mr-2"></i>
-                Nouveau Mouvement
-            </a>
+    <!-- Header avec gradient -->
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl shadow-xl p-8 text-white">
+        <div class="md:flex md:items-center md:justify-between">
+            <div class="min-w-0 flex-1">
+                <h2 class="text-3xl font-extrabold sm:text-4xl">
+                    <i class="fas fa-warehouse mr-3"></i>
+                    Mouvements de Stock
+                </h2>
+                <p class="mt-2 text-purple-100">Suivez tous les mouvements de votre stock en temps réel</p>
+            </div>
+            <div class="mt-4 flex md:ml-4 md:mt-0 space-x-3 flex-wrap">
+                <a href="{% url 'stocks:entree' %}" 
+                   class="inline-flex items-center px-4 py-3 border-2 border-white rounded-lg text-sm font-semibold text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-up mr-2"></i>
+                    Entrée
+                </a>
+                <a href="{% url 'stocks:sortie' %}" 
+                   class="inline-flex items-center px-4 py-3 border-2 border-white rounded-lg text-sm font-semibold text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-arrow-down mr-2"></i>
+                    Sortie
+                </a>
+                <a href="{% url 'stocks:ajustement' %}" 
+                   class="inline-flex items-center px-4 py-3 border-2 border-white rounded-lg text-sm font-semibold text-white bg-white bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white backdrop-blur-sm transition-all transform hover:scale-105">
+                    <i class="fas fa-exchange-alt mr-2"></i>
+                    Ajustement
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Filtres -->
-    <div class="bg-white shadow rounded-lg p-6">
+    <!-- Filtres améliorés -->
+    <div class="bg-white shadow-xl rounded-2xl p-6 border border-gray-100">
         <form method="get" class="grid grid-cols-1 gap-4 sm:grid-cols-4">
             <div>
-                <label for="search" class="block text-sm font-medium text-gray-700">Recherche</label>
-                <input type="text" name="search" id="search" value="{{ search }}"
-                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                       placeholder="Produit, référence...">
+                <label for="search" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-search text-blue-600 mr-1"></i>Recherche
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                    <input type="text" name="search" id="search" value="{{ search }}"
+                           class="block w-full pl-10 pr-3 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
+                           placeholder="Produit, référence...">
+                </div>
             </div>
             <div>
-                <label for="type_mouvement" class="block text-sm font-medium text-gray-700">Type</label>
+                <label for="type_mouvement" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-exchange-alt text-purple-600 mr-1"></i>Type
+                </label>
                 <select name="type_mouvement" id="type_mouvement"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
                     <option value="">Tous les types</option>
                     {% for code, label in type_choices %}
                         <option value="{{ code }}" {% if type_filter == code %}selected{% endif %}>
@@ -53,9 +65,11 @@
                 </select>
             </div>
             <div>
-                <label for="motif" class="block text-sm font-medium text-gray-700">Motif</label>
+                <label for="motif" class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-list text-pink-600 mr-1"></i>Motif
+                </label>
                 <select name="motif" id="motif"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        class="block w-full px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
                     <option value="">Tous les motifs</option>
                     {% for code, label in motif_choices %}
                         <option value="{{ code }}" {% if motif_filter == code %}selected{% endif %}>
@@ -66,12 +80,12 @@
             </div>
             <div class="flex items-end space-x-2">
                 <button type="submit"
-                        class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <i class="fas fa-search mr-2"></i>
+                        class="flex-1 inline-flex justify-center items-center px-4 py-3 border border-transparent rounded-xl shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transform transition hover:scale-105">
+                    <i class="fas fa-filter mr-2"></i>
                     Filtrer
                 </button>
                 <a href="{% url 'stocks:list' %}"
-                   class="flex-1 inline-flex justify-center items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                   class="flex-1 inline-flex justify-center items-center px-4 py-3 border-2 border-gray-300 rounded-xl shadow-sm text-sm font-semibold text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transform transition hover:scale-105">
                     <i class="fas fa-times mr-2"></i>
                     Effacer
                 </a>
@@ -79,71 +93,90 @@
         </form>
     </div>
 
-    <!-- Liste des mouvements -->
-    <div class="bg-white shadow rounded-lg overflow-hidden">
-        <div class="px-4 py-5 sm:p-6">
+    <!-- Liste des mouvements améliorée -->
+    <div class="bg-white shadow-xl rounded-2xl overflow-hidden border border-gray-100">
+        <div class="px-6 py-6 sm:px-8 sm:py-8">
             <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-gray-200">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gradient-to-r from-gray-50 to-purple-50">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produit</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Motif</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Référence</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Valeur</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Produit</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Quantité</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Motif</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Référence</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Valeur</th>
+                            <th class="px-6 py-4 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         {% for mouvement in mouvements %}
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ mouvement.date_mouvement|date:"d/m/Y H:i" }}
+                        <tr class="hover:bg-purple-50 transition-colors">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-medium text-gray-900">{{ mouvement.date_mouvement|date:"d/m/Y" }}</div>
+                                <div class="text-xs text-gray-500">{{ mouvement.date_mouvement|date:"H:i" }}</div>
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                {{ mouvement.produit.nom }}
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm font-bold text-gray-900">{{ mouvement.produit.nom }}</div>
                                 <div class="text-xs text-gray-500">{{ mouvement.produit.code_produit }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 {% if mouvement.type_mouvement == 'ENTREE' %}
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-green-100 text-green-800 shadow-sm">
                                         <i class="fas fa-arrow-up mr-1"></i>
                                         {{ mouvement.get_type_mouvement_display }}
                                     </span>
                                 {% elif mouvement.type_mouvement == 'SORTIE' %}
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-red-100 text-red-800 shadow-sm">
                                         <i class="fas fa-arrow-down mr-1"></i>
                                         {{ mouvement.get_type_mouvement_display }}
                                     </span>
                                 {% else %}
-                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                                    <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 shadow-sm">
                                         <i class="fas fa-exchange-alt mr-1"></i>
                                         {{ mouvement.get_type_mouvement_display }}
                                     </span>
                                 {% endif %}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ mouvement.quantite }} {{ mouvement.produit.unite }}
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                {{ mouvement.quantite }} {{ mouvement.produit.get_unite_display }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                 {{ mouvement.get_motif_display }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ mouvement.reference|default:"-" }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 {% if mouvement.valeur_totale %}
-                                    {{ mouvement.valeur_totale|floatformat:2 }} €
+                                    {{ mouvement.valeur_totale|floatformat:2 }} FCFA
                                 {% else %}
-                                    -
+                                    <span class="text-gray-400">-</span>
                                 {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="{% url 'stocks:detail' mouvement.pk %}" 
+                                   class="text-blue-600 hover:text-blue-800 transform hover:scale-110 transition-all" title="Voir">
+                                    <i class="fas fa-eye text-lg"></i>
+                                </a>
                             </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="7" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
-                                Aucun mouvement trouvé
+                            <td colspan="8" class="px-6 py-16 text-center">
+                                <div class="flex flex-col items-center">
+                                    <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-100 mb-4">
+                                        <i class="fas fa-warehouse text-gray-400 text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Aucun mouvement trouvé</h3>
+                                    <p class="text-gray-600 mb-6">Commencez par enregistrer un mouvement de stock</p>
+                                    <a href="{% url 'stocks:entree' %}" 
+                                       class="inline-flex items-center px-6 py-3 border border-transparent rounded-xl shadow-lg text-base font-semibold text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transform transition hover:scale-105">
+                                        <i class="fas fa-arrow-up mr-2"></i>
+                                        Enregistrer une entrée
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         {% endfor %}

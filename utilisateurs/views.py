@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, TemplateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.contrib.auth import login
+from django.contrib.auth import login, logout as auth_logout
 from django.db.models import Q
 
 from .models import User, ProfilUtilisateur
@@ -16,10 +16,27 @@ class LoginView(LoginView):
     
     def get_success_url(self):
         return reverse_lazy('core:dashboard')
+    
+    def get(self, request, *args, **kwargs):
+        # Si l'utilisateur vient de la page d'accueil avec un paramètre modal
+        if request.GET.get('from_home'):
+            # On peut rediriger vers une page de connexion spéciale ou utiliser le modal
+            return super().get(request, *args, **kwargs)
+        return super().get(request, *args, **kwargs)
 
 
-class LogoutView(LogoutView):
-    next_page = reverse_lazy('utilisateurs:login')
+class LogoutView(TemplateView):
+    """
+    Vue personnalisée pour la déconnexion qui supporte GET et POST
+    """
+    template_name = 'utilisateurs/login.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        """Gère la déconnexion pour les requêtes GET et POST"""
+        if request.user.is_authenticated:
+            auth_logout(request)
+            messages.success(request, 'Vous avez été déconnecté avec succès.')
+        return redirect('/')
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
