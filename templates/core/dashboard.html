@@ -81,7 +81,7 @@
                     <div class="ml-5 w-0 flex-1">
                         <dl>
                             <dt class="text-sm font-medium text-gray-500 truncate">CA du mois</dt>
-                            <dd class="text-lg font-medium text-gray-900">{{ ca_mois|floatformat:2 }} €</dd>
+                            <dd class="text-lg font-medium text-gray-900">{{ ca_mois|floatformat:2 }} FCFA</dd>
                         </dl>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                                 {{ vente.client_nom }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                {{ vente.montant_final|floatformat:2 }} €
+                                {{ vente.montant_final|floatformat:2 }} FCFA
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                 {{ vente.date_vente|date:"d/m/Y H:i" }}

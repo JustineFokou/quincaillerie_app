@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Nouvelle Catégorie - Gestion Quincaillerie{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-tags mr-2"></i>
+                Nouvelle Catégorie
+            </h2>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0">
+            <a href="{% url 'produits:categorie_list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour à la liste
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <!-- Nom -->
+                    <div class="sm:col-span-2">
+                        <label for="nom" class="block text-sm font-medium text-gray-700">
+                            Nom de la Catégorie *
+                        </label>
+                        <input type="text" name="nom" id="nom" required
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Ex: Outillage, Quincaillerie, Peinture...">
+                    </div>
+
+                    <!-- Description -->
+                    <div class="sm:col-span-2">
+                        <label for="description" class="block text-sm font-medium text-gray-700">
+                            Description
+                        </label>
+                        <textarea name="description" id="description" rows="3"
+                                  class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                  placeholder="Description de la catégorie..."></textarea>
+                    </div>
+
+                    <!-- Couleur -->
+                    <div class="sm:col-span-2">
+                        <label for="couleur" class="block text-sm font-medium text-gray-700">
+                            Couleur *
+                        </label>
+                        <div class="mt-1 flex items-center space-x-4">
+                            <input type="color" name="couleur" id="couleur" value="#3B82F6"
+                                   class="h-10 w-20 border border-gray-300 rounded-md cursor-pointer">
+                            <input type="text" name="couleur" id="couleur_text" value="#3B82F6"
+                                   class="block w-32 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            <span class="text-sm text-gray-500">Couleur d'identification de la catégorie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aperçu -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Aperçu</label>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="h-10 w-10 rounded-full flex items-center justify-center"
+                                 id="preview-icon"
+                                 style="background-color: #3B82F620;">
+                                <i class="fas fa-tag text-xl" id="preview-icon-color" style="color: #3B82F6;"></i>
+                            </div>
+                            <div>
+                                <span class="text-lg font-medium" id="preview-name">Nom de la catégorie</span>
+                                <p class="text-sm text-gray-500" id="preview-desc">Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Boutons -->
+                <div class="flex justify-end space-x-3">
+                    <a href="{% url 'produits:categorie_list' %}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Annuler
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-save mr-2"></i>
+                        Créer la catégorie
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mise à jour de l'aperçu en temps réel
+    document.getElementById('nom').addEventListener('input', function() {
+        document.getElementById('preview-name').textContent = this.value || 'Nom de la catégorie';
+    });
+
+    document.getElementById('description').addEventListener('input', function() {
+        document.getElementById('preview-desc').textContent = this.value || 'Description';
+    });
+
+    document.getElementById('couleur').addEventListener('input', function() {
+        const color = this.value;
+        document.getElementById('couleur_text').value = color;
+        document.getElementById('preview-icon').style.backgroundColor = color + '20';
+        document.getElementById('preview-icon-color').style.color = color;
+    });
+
+    document.getElementById('couleur_text').addEventListener('input', function() {
+        const color = this.value;
+        if (/^#[0-9A-F]{6}$/i.test(color)) {
+            document.getElementById('couleur').value = color;
+            document.getElementById('preview-icon').style.backgroundColor = color + '20';
+            document.getElementById('preview-icon-color').style.color = color;
+        }
+    });
+</script>
+{% endblock %}
+

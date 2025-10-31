@@ -65,17 +65,84 @@
                                         <span class="text-white text-sm font-medium">{{ user.first_name|first|upper }}{{ user.last_name|first|upper }}</span>
                                     </div>
                                     <span class="ml-2 text-gray-700">{{ user.first_name }} {{ user.last_name }}</span>
+                                    <i class="fas fa-chevron-down ml-2 text-gray-400 text-xs"></i>
                                 </button>
                             </div>
-                            <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                <a href="{% url 'utilisateurs:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Votre profil</a>
-                                <a href="{% url 'utilisateurs:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1">Se déconnecter</a>
+                            <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" id="user-menu" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <a href="{% url 'utilisateurs:profile' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
+                                    <i class="fas fa-user mr-2"></i>Votre profil
+                                </a>
+                                {% if user.is_superuser or user.role == 'ADMIN' %}
+                                <a href="{% url 'utilisateurs:list' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
+                                    <i class="fas fa-users mr-2"></i>Utilisateurs
+                                </a>
+                                {% endif %}
+                                <hr class="my-1">
+                                <a href="{% url 'utilisateurs:logout' %}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors" role="menuitem" tabindex="-1">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Se déconnecter
+                                </a>
                             </div>
                         </div>
+                    </div>
+                    <!-- Mobile menu button -->
+                    <div class="-mr-2 flex items-center sm:hidden">
+                        <button type="button" class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" id="mobile-menu-button">
+                            <span class="sr-only">Open main menu</span>
+                            <i class="fas fa-bars text-lg" id="mobile-menu-icon"></i>
+                        </button>
                     </div>
                 </div>
             </div>
         </nav>
+
+        <!-- Mobile menu -->
+        <div class="hidden sm:hidden bg-white border-b border-gray-200" id="mobile-menu">
+            <div class="space-y-1 px-2 pt-2 pb-3">
+                <a href="{% url 'core:dashboard' %}" 
+                   class="{% if request.resolver_match.url_name == 'dashboard' %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    Dashboard
+                </a>
+                <a href="{% url 'produits:list' %}" 
+                   class="{% if 'produits' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
+                    <i class="fas fa-box mr-2"></i>
+                    Produits
+                </a>
+                <a href="{% url 'stocks:list' %}" 
+                   class="{% if 'stocks' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
+                    <i class="fas fa-warehouse mr-2"></i>
+                    Stock
+                </a>
+                <a href="{% url 'ventes:list' %}" 
+                   class="{% if 'ventes' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    Ventes
+                </a>
+                <a href="{% url 'fournisseurs:list' %}" 
+                   class="{% if 'fournisseurs' in request.resolver_match.namespace %}bg-blue-50 border-blue-500 text-blue-700{% else %}border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300{% endif %} block border-l-4 py-2 pl-3 pr-4 text-base font-medium">
+                    <i class="fas fa-truck mr-2"></i>
+                    Fournisseurs
+                </a>
+                <hr class="my-2">
+                <a href="{% url 'utilisateurs:profile' %}" 
+                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
+                    <i class="fas fa-user mr-2"></i>
+                    Mon profil
+                </a>
+                {% if user.is_superuser or user.role == 'ADMIN' %}
+                <a href="{% url 'utilisateurs:list' %}" 
+                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
+                    <i class="fas fa-users mr-2"></i>
+                    Utilisateurs
+                </a>
+                {% endif %}
+                <a href="{% url 'utilisateurs:logout' %}" 
+                   class="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-600 hover:bg-gray-50">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Déconnexion
+                </a>
+            </div>
+        </div>
 
         <!-- Messages -->
         {% if messages %}
@@ -119,19 +186,40 @@
     <!-- Custom JS -->
     <script>
         // Profile dropdown toggle
-        document.getElementById('user-menu-button').addEventListener('click', function() {
-            const dropdown = this.nextElementSibling;
-            dropdown.classList.toggle('hidden');
-        });
+        const userMenuButton = document.getElementById('user-menu-button');
+        const userMenu = document.getElementById('user-menu');
+        
+        if (userMenuButton && userMenu) {
+            userMenuButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userMenu.classList.toggle('hidden');
+            });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(event) {
-            const button = document.getElementById('user-menu-button');
-            const dropdown = button.nextElementSibling;
-            if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-                dropdown.classList.add('hidden');
-            }
-        });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!userMenuButton.contains(event.target) && !userMenu.contains(event.target)) {
+                    userMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+        
+        if (mobileMenuButton && mobileMenu && mobileMenuIcon) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenuIcon.classList.remove('fa-times');
+                    mobileMenuIcon.classList.add('fa-bars');
+                } else {
+                    mobileMenuIcon.classList.remove('fa-bars');
+                    mobileMenuIcon.classList.add('fa-times');
+                }
+            });
+        }
     </script>
     
     {% block extra_js %}{% endblock %}

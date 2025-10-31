@@ -1,0 +1,174 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Finaliser Vente {{ vente.numero_vente }}{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                Finaliser la Vente {{ vente.numero_vente }}
+            </h2>
+            <p class="mt-1 text-sm text-gray-500">Client: {{ vente.client_nom }}</p>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0">
+            <a href="{% url 'ventes:detail' vente.pk %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour aux détails
+            </a>
+        </div>
+    </div>
+
+    <!-- Informations vente -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                Informations de la Vente
+            </h3>
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-3">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Client</dt>
+                    <dd class="mt-1 text-sm text-gray-900 font-semibold">{{ vente.client_nom }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Montant Actuel</dt>
+                    <dd class="mt-1 text-sm text-gray-900 font-semibold">{{ vente.montant_final|floatformat:2 }} €</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Articles Actuels</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ vente.lignes.count }} article(s)</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Formulaire d'ajout d'articles -->
+    <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-plus-circle text-green-500 mr-2"></i>
+                Ajouter des Articles
+            </h3>
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div id="articles-container">
+                    <div class="article-item grid grid-cols-1 gap-4 sm:grid-cols-4 mb-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700">Produit</label>
+                            <select name="produits" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <option value="">Sélectionner un produit</option>
+                                {% for produit in produits %}
+                                    <option value="{{ produit.id }}" 
+                                            data-prix="{{ produit.prix_vente }}"
+                                            data-stock="{{ produit.stock_actuel }}">
+                                        {{ produit.code_produit }} - {{ produit.nom }} 
+                                        (Stock: {{ produit.stock_actuel }}, Prix: {{ produit.prix_vente|floatformat:2 }} €)
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Quantité</label>
+                            <input type="number" name="quantites" min="1" value="1" 
+                                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="flex items-end">
+                            <button type="button" class="remove-article w-full inline-flex justify-center items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-red-700 bg-white hover:bg-red-50">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="add-article" 
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-plus mr-2"></i>
+                    Ajouter un autre article
+                </button>
+
+                <div class="flex justify-end space-x-3 pt-6 border-t border-gray-200">
+                    <a href="{% url 'ventes:detail' vente.pk %}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Annuler
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        <i class="fas fa-check mr-2"></i>
+                        Finaliser la vente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Articles actuels -->
+    {% if vente.lignes.all %}
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-list text-blue-500 mr-2"></i>
+                Articles Actuellement dans la Vente
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produit</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantité</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix Unitaire</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Montant</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for ligne in vente.lignes.all %}
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ ligne.produit.nom }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ligne.quantite }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ ligne.prix_unitaire|floatformat:2 }} €</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">{{ ligne.montant_ligne|floatformat:2 }} €</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 text-right">
+                <p class="text-lg font-semibold text-gray-900">
+                    Total actuel: {{ vente.montant_final|floatformat:2 }} €
+                </p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Ajouter un article
+    document.getElementById('add-article').addEventListener('click', function() {
+        const container = document.getElementById('articles-container');
+        const firstItem = container.querySelector('.article-item');
+        const newItem = firstItem.cloneNode(true);
+        
+        // Réinitialiser les valeurs
+        newItem.querySelector('select').selectedIndex = 0;
+        newItem.querySelector('input[type="number"]').value = 1;
+        
+        container.appendChild(newItem);
+    });
+
+    // Supprimer un article
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.remove-article')) {
+            const container = document.getElementById('articles-container');
+            if (container.children.length > 1) {
+                e.target.closest('.article-item').remove();
+            }
+        }
+    });
+</script>
+{% endblock %}
+

@@ -1,0 +1,173 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{% if fournisseur %}Modifier{% else %}Nouveau{% endif %} Fournisseur - Gestion Quincaillerie{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-truck mr-2"></i>
+                {% if fournisseur %}Modifier le Fournisseur{% else %}Nouveau Fournisseur{% endif %}
+            </h2>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0">
+            <a href="{% url 'fournisseurs:list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour à la liste
+            </a>
+        </div>
+    </div>
+
+    <!-- Formulaire -->
+    <div class="bg-white shadow rounded-lg">
+        <div class="px-4 py-5 sm:p-6">
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <!-- Nom -->
+                    <div>
+                        <label for="nom" class="block text-sm font-medium text-gray-700">
+                            Nom du Fournisseur *
+                        </label>
+                        <input type="text" name="nom" id="nom" required
+                               value="{% if fournisseur %}{{ fournisseur.nom }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <label for="contact" class="block text-sm font-medium text-gray-700">
+                            Contact
+                        </label>
+                        <input type="text" name="contact" id="contact"
+                               value="{% if fournisseur %}{{ fournisseur.contact }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Nom du contact">
+                    </div>
+
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">
+                            Email
+                        </label>
+                        <input type="email" name="email" id="email"
+                               value="{% if fournisseur %}{{ fournisseur.email }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="contact@fournisseur.com">
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div>
+                        <label for="telephone" class="block text-sm font-medium text-gray-700">
+                            Téléphone
+                        </label>
+                        <input type="tel" name="telephone" id="telephone"
+                               value="{% if fournisseur %}{{ fournisseur.telephone }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="+33 1 23 45 67 89">
+                    </div>
+
+                    <!-- Adresse -->
+                    <div class="sm:col-span-2">
+                        <label for="adresse" class="block text-sm font-medium text-gray-700">
+                            Adresse
+                        </label>
+                        <input type="text" name="adresse" id="adresse"
+                               value="{% if fournisseur %}{{ fournisseur.adresse }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="Numéro et nom de rue">
+                    </div>
+
+                    <!-- Ville -->
+                    <div>
+                        <label for="ville" class="block text-sm font-medium text-gray-700">
+                            Ville
+                        </label>
+                        <input type="text" name="ville" id="ville"
+                               value="{% if fournisseur %}{{ fournisseur.ville }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Code Postal -->
+                    <div>
+                        <label for="code_postal" class="block text-sm font-medium text-gray-700">
+                            Code Postal
+                        </label>
+                        <input type="text" name="code_postal" id="code_postal"
+                               value="{% if fournisseur %}{{ fournisseur.code_postal }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Pays -->
+                    <div>
+                        <label for="pays" class="block text-sm font-medium text-gray-700">
+                            Pays
+                        </label>
+                        <input type="text" name="pays" id="pays" value="{% if fournisseur %}{{ fournisseur.pays }}{% else %}France{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+
+                    <!-- Numéro TVA -->
+                    <div>
+                        <label for="numero_tva" class="block text-sm font-medium text-gray-700">
+                            Numéro TVA
+                        </label>
+                        <input type="text" name="numero_tva" id="numero_tva"
+                               value="{% if fournisseur %}{{ fournisseur.numero_tva }}{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="FR12345678901">
+                    </div>
+
+                    <!-- Conditions de Paiement -->
+                    <div>
+                        <label for="conditions_paiement" class="block text-sm font-medium text-gray-700">
+                            Conditions de Paiement
+                        </label>
+                        <input type="text" name="conditions_paiement" id="conditions_paiement"
+                               value="{% if fournisseur %}{{ fournisseur.conditions_paiement }}{% else %}30 jours{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                               placeholder="30 jours">
+                    </div>
+
+                    <!-- Délai de Livraison -->
+                    <div>
+                        <label for="delai_livraison" class="block text-sm font-medium text-gray-700">
+                            Délai de Livraison (jours)
+                        </label>
+                        <input type="number" name="delai_livraison" id="delai_livraison" min="0"
+                               value="{% if fournisseur %}{{ fournisseur.delai_livraison }}{% else %}7{% endif %}"
+                               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div>
+                    <label for="note" class="block text-sm font-medium text-gray-700">
+                        Notes
+                    </label>
+                    <textarea name="note" id="note" rows="3"
+                              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">{% if fournisseur %}{{ fournisseur.note }}{% endif %}</textarea>
+                </div>
+
+                <!-- Boutons -->
+                <div class="flex justify-end space-x-3">
+                    <a href="{% url 'fournisseurs:list' %}" 
+                       class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Annuler
+                    </a>
+                    <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        <i class="fas fa-save mr-2"></i>
+                        {% if fournisseur %}Mettre à jour{% else %}Créer{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

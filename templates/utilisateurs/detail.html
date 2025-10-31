@@ -1,0 +1,157 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ user_detail.get_full_name }} - Détails Utilisateur{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-user mr-2"></i>
+                {{ user_detail.get_full_name }}
+            </h2>
+            <p class="mt-1 text-sm text-gray-500">{{ user_detail.username }}</p>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0 space-x-3">
+            <a href="{% url 'utilisateurs:update' user_detail.pk %}" 
+               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <i class="fas fa-edit mr-2"></i>
+                Modifier
+            </a>
+            <a href="{% url 'utilisateurs:list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour à la liste
+            </a>
+        </div>
+    </div>
+
+    <!-- Informations personnelles -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-info-circle text-blue-500 mr-2"></i>
+                Informations Personnelles
+            </h3>
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Nom d'utilisateur</dt>
+                    <dd class="mt-1 text-sm text-gray-900 font-semibold">{{ user_detail.username }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Nom complet</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.first_name }} {{ user_detail.last_name }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Email</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.email|default:"-" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Rôle</dt>
+                    <dd class="mt-1">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            <i class="fas fa-user-tag mr-1"></i>
+                            {{ user_detail.get_role_display }}
+                        </span>
+                    </dd>
+                </div>
+                {% if user_detail.telephone %}
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Téléphone</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.telephone }}</dd>
+                </div>
+                {% endif %}
+                {% if user_detail.adresse %}
+                <div class="sm:col-span-2">
+                    <dt class="text-sm font-medium text-gray-500">Adresse</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.adresse }}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+
+    <!-- Informations professionnelles -->
+    {% if user_detail.date_embauche or user_detail.salaire %}
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-briefcase text-green-500 mr-2"></i>
+                Informations Professionnelles
+            </h3>
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+                {% if user_detail.date_embauche %}
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Date d'embauche</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.date_embauche|date:"d/m/Y" }}</dd>
+                </div>
+                {% endif %}
+                {% if user_detail.salaire %}
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Salaire</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.salaire|floatformat:2 }} €</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Informations système -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+                <i class="fas fa-clock text-gray-500 mr-2"></i>
+                Informations Système
+            </h3>
+            <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Date de dernière connexion</dt>
+                    <dd class="mt-1 text-sm text-gray-900">
+                        {% if user_detail.last_login %}
+                            {{ user_detail.last_login|date:"d/m/Y H:i" }}
+                        {% else %}
+                            <span class="text-gray-400">Jamais connecté</span>
+                        {% endif %}
+                    </dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Date d'inscription</dt>
+                    <dd class="mt-1 text-sm text-gray-900">{{ user_detail.date_joined|date:"d/m/Y H:i" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Compte actif</dt>
+                    <dd class="mt-1">
+                        {% if user_detail.is_active %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Actif
+                            </span>
+                        {% else %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                                <i class="fas fa-times-circle mr-1"></i>
+                                Inactif
+                            </span>
+                        {% endif %}
+                    </dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500">Super utilisateur</dt>
+                    <dd class="mt-1">
+                        {% if user_detail.is_superuser %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                <i class="fas fa-crown mr-1"></i>
+                                Oui
+                            </span>
+                        {% else %}
+                            <span class="text-gray-400">Non</span>
+                        {% endif %}
+                    </dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

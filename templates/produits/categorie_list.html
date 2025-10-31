@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Catégories - Gestion Quincaillerie{% endblock %}
+
+{% block content %}
+<div class="space-y-6">
+    <!-- Header -->
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="min-w-0 flex-1">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+                <i class="fas fa-tags mr-2"></i>
+                Gestion des Catégories
+            </h2>
+        </div>
+        <div class="mt-4 flex md:ml-4 md:mt-0 space-x-3">
+            <a href="{% url 'produits:categorie_create' %}" 
+               class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-plus mr-2"></i>
+                Nouvelle Catégorie
+            </a>
+            <a href="{% url 'produits:list' %}" 
+               class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Retour aux Produits
+            </a>
+        </div>
+    </div>
+
+    <!-- Liste des catégories -->
+    <div class="bg-white shadow rounded-lg overflow-hidden">
+        <div class="px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {% for categorie in categories %}
+                <div class="relative rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <div class="h-12 w-12 rounded-full flex items-center justify-center"
+                                 style="background-color: {{ categorie.couleur }}20;">
+                                <i class="fas fa-tag text-xl" style="color: {{ categorie.couleur }};"></i>
+                            </div>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="text-lg font-medium text-gray-900">{{ categorie.nom }}</h3>
+                            {% if categorie.description %}
+                                <p class="mt-1 text-sm text-gray-500 line-clamp-2">{{ categorie.description }}</p>
+                            {% endif %}
+                            <div class="mt-2 flex items-center text-sm text-gray-500">
+                                <i class="fas fa-box mr-1"></i>
+                                <span>{{ categorie.produits.count }} produit(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% if categorie.description %}
+                    <div class="mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-600">{{ categorie.description }}</p>
+                    </div>
+                    {% endif %}
+                    <div class="mt-4 flex justify-end space-x-2">
+                        <a href="{% url 'produits:list' %}?categorie={{ categorie.id }}" 
+                           class="text-sm text-blue-600 hover:text-blue-800">
+                            <i class="fas fa-eye mr-1"></i>
+                            Voir produits
+                        </a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-span-full text-center py-12">
+                    <i class="fas fa-tags text-gray-400 text-4xl mb-4"></i>
+                    <p class="text-gray-500">Aucune catégorie trouvée</p>
+                    <a href="{% url 'produits:categorie_create' %}" 
+                       class="mt-4 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+                        <i class="fas fa-plus mr-2"></i>
+                        Créer la première catégorie
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
