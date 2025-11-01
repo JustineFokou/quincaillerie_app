@@ -2,10 +2,13 @@ services:
   - type: web
     name: quincaillerie-app
     env: python
-    buildCommand: pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput
-    startCommand: gunicorn quincaillerie.wsgi:application
     plan: starter
     region: frankfurt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn quincaillerie.wsgi:application
     envVars:
       - key: DEBUG
         value: False
@@ -13,25 +16,4 @@ services:
         value: your-secret-key-here
       - key: ALLOWED_HOSTS
         value: your-app-name.onrender.com
-{
-  "name": "quincaillerie-app",
-  "env": "python",
-  "buildCommand": "pip install -r requirements.txt && python manage.py migrate && python manage.py collectstatic --noinput",
-  "startCommand": "gunicorn quincaillerie.wsgi:application",
-  "plan": "starter",
-  "region": "frankfurt",
-  "envVars": [
-    {
-      "key": "DEBUG",
-      "value": "False"
-    },
-    {
-      "key": "SECRET_KEY",
-      "value": "your-secret-key-here"
-    },
-    {
-      "key": "ALLOWED_HOSTS",
-      "value": "your-app-name.onrender.com"
-    }
-  ]
-}
+
