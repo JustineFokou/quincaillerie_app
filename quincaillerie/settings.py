@@ -28,7 +28,14 @@ SECRET_KEY = config('SECRET_KEY', default="django-insecure-2(6b!ou)efk6*-bz3p7hr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
+# Configuration des hôtes autorisés pour la production
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+if not DEBUG:
+    # En production, ajouter automatiquement le domaine Render si présent
+    import os
+    render_domain = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if render_domain:
+        ALLOWED_HOSTS.append(render_domain)
 
 
 # Application definition
@@ -143,9 +150,19 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+# Configuration WhiteNoise pour servir les fichiers statiques en production
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Media files
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# Configuration pour le stockage des médias en production (à adapter selon vos besoins)
+if not DEBUG:
+    # En production, considérez utiliser un service de stockage cloud comme S3 ou Cloudinary
+    # Pour l'instant, les fichiers sont stockés localement
+    pass
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

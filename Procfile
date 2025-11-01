@@ -1,1 +1,1 @@
-web: gunicorn quincaillerie.wsgi
+web: gunicorn quincaillerie.wsgi:application --bind 0.0.0.0:$PORT
