@@ -1,4 +1,20 @@
 from produits.models import Produit
+from .models import CompanySettings
+
+
+def company_settings_context(request):
+    """
+    Context processor pour ajouter les informations de l'entreprise à tous les templates
+    """
+    try:
+        company_settings = CompanySettings.get_settings()
+        return {
+            'company_settings': company_settings
+        }
+    except Exception:
+        return {
+            'company_settings': None
+        }
 
 
 def alertes_context(request):

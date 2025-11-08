@@ -12,6 +12,7 @@ Une application web moderne de gestion de quincaillerie développée avec Django
 - **Gestion des Ventes** : Création et suivi des ventes
 - **Gestion des Fournisseurs** : Base de données des fournisseurs
 - **Gestion des Utilisateurs** : Système de rôles (Admin, Gérant, Vendeur, Stockiste)
+- **Configuration de l'Entreprise** : Enregistrement des informations de l'entreprise (nom, adresse, contacts, logo)
 - **Interface d'Administration** : Interface Django Admin complète
 - **Authentification** : Système de connexion/déconnexion
 - **Interface Moderne** : Design responsive avec Tailwind CSS et Flowbite
@@ -123,6 +124,14 @@ quincaillerie_app/
 - Rôles personnalisés (Admin, Gérant, Vendeur, Stockiste)
 - Permissions granulaires
 - Profils utilisateur étendus
+
+### Configuration de l'Entreprise
+- Informations de l'entreprise (nom, slogan, adresse)
+- Contacts (téléphones, email, site web)
+- Logo de l'entreprise
+- Numéro fiscal
+- Devise par défaut
+- Interface d'administration dédiée
 
 ## 🚀 Déploiement
 

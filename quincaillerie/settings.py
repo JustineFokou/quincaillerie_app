@@ -82,6 +82,7 @@ TEMPLATES = [
                 "django.template.context_processors.i18n",  # Ajout du context processor i18n
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "core.context_processors.company_settings_context",
                 "core.context_processors.alertes_context",
             ],
         },

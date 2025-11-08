@@ -25,8 +25,14 @@
                 <!-- Logo et Info Utilisateur -->
                 <div class="mb-6 px-3 pb-4 border-b border-gray-200">
                     <div class="flex items-center mb-3">
-                        <i class="fas fa-tools text-2xl text-blue-600"></i>
-                        <span class="ml-2 text-xl font-bold text-gray-900">Quincaillerie</span>
+                        {% if company_settings and company_settings.logo %}
+                            <img src="{{ company_settings.logo.url }}" alt="{{ company_settings.nom_entreprise }}" class="w-10 h-10 rounded-lg object-cover">
+                        {% else %}
+                            <i class="fas fa-tools text-2xl text-blue-600"></i>
+                        {% endif %}
+                        <span class="ml-2 text-xl font-bold text-gray-900">
+                            {% if company_settings %}{{ company_settings.nom_entreprise }}{% else %}Quincaillerie{% endif %}
+                        </span>
                     </div>
                     <div class="flex items-center text-sm text-gray-600">
                         <div class="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center mr-2">
