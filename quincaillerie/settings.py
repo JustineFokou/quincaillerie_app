@@ -30,7 +30,17 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 
 # Configuration des hôtes autorisés pour la production
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+
+# Render Configuration & Production Security
 if not DEBUG:
+    # Tell Django to trust the X-Forwarded-Proto header coming from the proxy
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Security settings
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    
     # En production, ajouter automatiquement le domaine Render si présent
     import os
     render_domain = os.environ.get('RENDER_EXTERNAL_HOSTNAME')

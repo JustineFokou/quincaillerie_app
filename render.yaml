@@ -5,11 +5,7 @@ services:
     env: python
     plan: starter
     region: frankfurt
-    buildCommand: |
-      pip install --upgrade pip
-      pip install -r requirements.txt
-      python manage.py migrate --noinput
-      python manage.py collectstatic --noinput
+    buildCommand: "./build.sh"
     startCommand: gunicorn quincaillerie.wsgi:application --bind 0.0.0.0:$PORT
     envVars:
       - key: PYTHON_VERSION
@@ -25,9 +21,15 @@ services:
           name: quincaillerie-db
           property: connectionString
       - key: CELERY_BROKER_URL
-        value: redis://red-xxxxx:6379/0  # À remplacer par votre Redis Render
+        fromService:
+          type: redis
+          name: quincaillerie-redis
+          property: connectionString
       - key: CELERY_RESULT_BACKEND
-        value: redis://red-xxxxx:6379/0  # À remplacer par votre Redis Render
+        fromService:
+          type: redis
+          name: quincaillerie-redis
+          property: connectionString
 
   # Base de données PostgreSQL
   - type: pspg

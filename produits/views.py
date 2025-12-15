@@ -194,3 +194,4 @@ class CategorieCreateView(LoginRequiredMixin, TemplateView):
         except Exception as e:
             messages.error(request, f'Erreur lors de la création : {str(e)}')
             return self.get(request, *args, **kwargs)
+
