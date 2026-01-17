@@ -28,7 +28,7 @@ class MouvementStockListView(LoginRequiredMixin, ListView):
                 Q(produit__nom__icontains=search) |
                 Q(produit__code_produit__icontains=search) |
                 Q(reference__icontains=search) |
-                Q(commentaire__icontains=search)
+                Q(commentaire__icontains=search) 
             )
         
         # Filtrage par type de mouvement
